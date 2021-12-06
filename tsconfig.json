@@ -18,8 +18,8 @@
     "module": "es2020",
     "lib": ["es2018", "dom"],
     "paths": {
-      "@core/*": ["app/core/*"],
-      "@modules/*": ["app/modules/*"]
+      "@modules/*": ["app/modules/*"],
+      "@core/*": ["app/core/*"]
     }
   },
   "angularCompilerOptions": {

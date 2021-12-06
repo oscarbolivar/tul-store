@@ -5,21 +5,21 @@ import { LayoutComponent } from '@modules/layout/components/layout/layout.compon
 const routes: Routes = [
   {
     path: '',
-    component: LayoutComponent,
+    component: LayoutComponent
   },
   {
     path: 'user',
-    loadChildren: () => import('../user/user.module').then((m) => m.UserModule),
+    loadChildren: () => import('../user/user.module').then((m) => m.UserModule)
   },
   {
     path: 'purchase',
     loadChildren: () =>
-      import('../purchase/purchase.module').then((m) => m.PurchaseModule),
-  },
+      import('../purchase/purchase.module').then((m) => m.PurchaseModule)
+  }
 ];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
-  exports: [RouterModule],
+  exports: [RouterModule]
 })
 export class LayoutRoutingModule {}

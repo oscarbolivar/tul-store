@@ -13,7 +13,7 @@ import { TranslateModule } from '@ngx-translate/core';
     LayoutRoutingModule,
     NzLayoutModule,
     NzMenuModule,
-    TranslateModule,
-  ],
+    TranslateModule
+  ]
 })
 export class LayoutModule {}

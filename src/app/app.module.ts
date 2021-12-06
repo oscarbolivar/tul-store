@@ -23,9 +23,9 @@ registerLocaleData(es_CO);
     HttpClientModule,
     BrowserAnimationsModule,
     TranslateModule.forRoot(translateConfig),
-    StoreModule.forRoot({}, {}),
+    StoreModule.forRoot({}, {})
   ],
   providers: [{ provide: NZ_I18N, useValue: es_ES }],
-  bootstrap: [AppComponent],
+  bootstrap: [AppComponent]
 })
 export class AppModule {}

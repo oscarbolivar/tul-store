@@ -4,6 +4,6 @@ import { PurchaseRoutingModule } from '@modules/purchase/purchase-routing.module
 
 @NgModule({
   declarations: [],
-  imports: [CommonModule, PurchaseRoutingModule],
+  imports: [CommonModule, PurchaseRoutingModule]
 })
 export class PurchaseModule {}
