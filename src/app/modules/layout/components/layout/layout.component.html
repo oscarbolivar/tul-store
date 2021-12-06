@@ -1,0 +1,33 @@
+<nz-layout>
+  <nz-header>
+    <div class="logo"></div>
+    <ul nz-menu nzMode="horizontal">
+      <li nz-menu-item nzSelected>
+        <i nz-icon nzType="mail"></i>
+        Comprar
+      </li>
+      <li nz-submenu nzTitle="Perfil" nzIcon="setting">
+        <ul>
+          <li nz-menu-group nzTitle="Item 1">
+            <ul>
+              <li nz-menu-item>Option 1</li>
+              <li nz-menu-item>Option 2</li>
+            </ul>
+          </li>
+          <li nz-menu-group nzTitle="Item 2">
+            <ul>
+              <li nz-menu-item>Option 3</li>
+              <li nz-menu-item>Option 4</li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+    </ul>
+  </nz-header>
+
+  <nz-content>
+    <div class="inner-content">
+      <router-outlet></router-outlet>
+    </div>
+  </nz-content>
+</nz-layout>
