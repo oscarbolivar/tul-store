@@ -1,11 +1,10 @@
 {
   "APP_TITLE": "TulStore",
   "AUTH": {
-    "LOGIN": {
+    "USER_FORM": {
       "FORM": {
         "EMAIL": "Correo electrónico",
-        "PASSWORD": "Contraseña",
-        "LOGIN_ACTION": "Iniciar sesión"
+        "PASSWORD": "Contraseña"
       },
       "VALIDATIONS": {
         "EMAIL_REQUIRED": "Ingresa un correo electrónico válido.",
@@ -13,8 +12,24 @@
         "PASSWORD_REQUIRED": "Tu contraseña es obligatoria."
       },
       "MESSAGES": {
-        "NOT_USER_FOUND": "No existe un usuario con esas credenciales.",
         "UNKNOWN_ERROR": "Ocurrió un error inesperado."
+      }
+    },
+    "LOGIN": {
+      "FORM": {
+        "TITLE": "Inicia sesión en TulStore",
+        "LOGIN_ACTION": "Iniciar sesión",
+        "REGISTER_ACTION": "Registrarme"
+      },
+      "MESSAGES": {
+        "NOT_USER_FOUND": "No existe un usuario con esas credenciales."
+      }
+    },
+    "REGISTER": {
+      "FORM": {
+        "TITLE": "Regístrate en TulStore",
+        "REGISTER_ACTION": "Guardar",
+        "LOGIN_ACTION": "Iniciar sesión"
       }
     }
   },

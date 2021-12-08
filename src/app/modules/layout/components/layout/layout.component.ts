@@ -2,7 +2,7 @@ import { AfterViewInit, Component, OnInit } from '@angular/core';
 import { AuthFacade } from '@modules/auth/facade/auth.facade';
 import { Observable } from 'rxjs';
 import { Router } from '@angular/router';
-import { HOME, LOGIN } from '@core/constants/routes';
+import { AUTH_LOGIN, HOME } from '@core/constants/routes';
 
 @Component({
   selector: 'app-layout',
@@ -20,7 +20,7 @@ export class LayoutComponent implements OnInit, AfterViewInit {
     setTimeout(() => {
       this.isLoggedIn$
         .subscribe((isLoggedIn) => {
-          this._router.navigate(isLoggedIn ? HOME : LOGIN);
+          this._router.navigate(isLoggedIn ? HOME : AUTH_LOGIN);
         })
         .unsubscribe();
     }, 600);

@@ -1,0 +1,29 @@
+@import '../../../../../../styles'
+
+.user-form
+  display: flex
+  align-items: center
+  justify-content: center
+  height: 100vh
+  padding: 20px
+
+  .user-form__layout
+    padding: 60px 30px
+    max-width: 400px
+
+    .user-form__title
+      padding: 0 0 36px 0
+
+    .user-form__field
+      margin-bottom: 30px
+      &:last-child
+        margin-bottom: 0
+      &--error
+        color: $error
+
+      .user-form__actions
+        ::ng-deep
+          .ant-form-item-control-input-content
+            display: flex
+            justify-content: space-evenly
+            align-items: center

@@ -22,3 +22,17 @@ export const loginErrorAction = createAction(
   '[Auth] Login User - Error',
   props<{ message: string }>()
 );
+
+export const registerAction = createAction(
+  '[Auth] Register User',
+  props<{ email: string; password: string }>()
+);
+
+export const registerSuccessAction = createAction(
+  '[Auth] Register User - Success'
+);
+
+export const registerErrorAction = createAction(
+  '[Auth] Register User - Error',
+  props<{ message: string }>()
+);

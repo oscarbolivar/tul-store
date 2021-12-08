@@ -1,52 +1,36 @@
-import { AfterViewInit, Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Component } from '@angular/core';
 import { AuthFacade } from '@modules/auth/facade/auth.facade';
 import { Observable } from 'rxjs';
 import { Router } from '@angular/router';
-import { HOME, LOGIN } from '@core/constants/routes';
+import { AUTH_LOGIN, AUTH_REGISTER, HOME } from '@core/constants/routes';
+import { User } from '@modules/auth/models/auth.model';
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.sass']
 })
-export class LoginComponent implements OnInit, AfterViewInit {
-  public formGroup!: FormGroup;
+export class LoginComponent {
+  constructor(private _facade: AuthFacade, private _router: Router) {}
 
-  constructor(
-    private _formBuilder: FormBuilder,
-    private _facade: AuthFacade,
-    private _router: Router
-  ) {}
-
-  ngOnInit(): void {
+  public isUserLoggedIn(): void {
     this._facade.isUserLoggedIn();
 
-    this.formGroup = this._formBuilder.group({
-      email: [null, [Validators.required, Validators.email]],
-      password: [null, [Validators.required]]
-    });
-  }
-
-  ngAfterViewInit(): void {
     setTimeout(() => {
       this.isLoggedIn$
         .subscribe((isLoggedIn) => {
-          this._router.navigate(isLoggedIn ? HOME : LOGIN);
+          this._router.navigate(isLoggedIn ? HOME : AUTH_LOGIN);
         })
         .unsubscribe();
     }, 600);
   }
 
-  public submit(): void {
-    this._facade.login(
-      this.formGroup.value.email,
-      this.formGroup.value.password
-    );
+  public login(user: User): void {
+    this._facade.login(user.email, user.password);
   }
 
-  get isDisabled(): boolean {
-    return !this.formGroup.valid;
+  public goToRegister(): void {
+    this._router.navigate(AUTH_REGISTER);
   }
 
   get isLoggedIn$(): Observable<boolean> {

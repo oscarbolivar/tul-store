@@ -29,7 +29,6 @@ export class LoginEffect {
         this._service.isUserLoggedIn$().pipe(
           filter((user) => user !== undefined),
           map((user) => {
-            console.log(!!user);
             return featureAction.isUserLoggedInSuccessAction({
               isLoggedIn: !!user
             });
@@ -57,9 +56,9 @@ export class LoginEffect {
                 ? this._translate.instant('AUTH.LOGIN.MESSAGES.NOT_USER_FOUND')
                 : error.code === FIREBASE_INVALID_EMAIL
                 ? this._translate.instant(
-                    'AUTH.LOGIN.VALIDATIONS.EMAIL_MALFORMED'
+                    'AUTH.USER_FORM.VALIDATIONS.EMAIL_MALFORMED'
                   )
-                : this._translate.instant('AUTH.LOGIN.MESSAGES.UNKNOWN_ERROR');
+                : this._translate.instant('AUTH.USER_FORM.MESSAGES.UNKNOWN_ERROR');
             return featureAction.loginErrorAction({ message });
           })
       )
