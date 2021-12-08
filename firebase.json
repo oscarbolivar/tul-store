@@ -1,6 +1,7 @@
 {
   "hosting": {
-    "public": "public",
+    "target": "tul-store",
+    "public": "dist/tul-store",
     "ignore": [
       "firebase.json",
       "**/.*",

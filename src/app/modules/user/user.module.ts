@@ -10,6 +10,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { TranslateModule } from '@ngx-translate/core';
 import { NzButtonModule } from 'ng-zorro-antd/button';
 import { UserFacade } from '@modules/user/facade/user.facade';
+import { NzPageHeaderModule } from 'ng-zorro-antd/page-header';
 
 @NgModule({
   declarations: [LoginComponent, UserContainer],
@@ -21,7 +22,8 @@ import { UserFacade } from '@modules/user/facade/user.facade';
     NzInputModule,
     ReactiveFormsModule,
     TranslateModule,
-    NzButtonModule
+    NzButtonModule,
+    NzPageHeaderModule
   ],
   providers: [UserFacade]
 })
