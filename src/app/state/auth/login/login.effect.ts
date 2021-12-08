@@ -11,6 +11,7 @@ import {
 } from '@core/constants/firebase';
 import { of } from 'rxjs';
 import { Router } from '@angular/router';
+import { HOME } from '@core/constants/routes';
 
 @Injectable()
 export class LoginEffect {
@@ -29,7 +30,6 @@ export class LoginEffect {
           filter((user) => user !== undefined),
           map((user) => {
             console.log(!!user);
-            this._router.navigate(!!user ? ['/'] : ['/auth/login']);
             return featureAction.isUserLoggedInSuccessAction({
               isLoggedIn: !!user
             });
@@ -46,7 +46,10 @@ export class LoginEffect {
       switchMap((action) =>
         this._service
           .login(action.email, action.password)
-          .then((_) => featureAction.loginSuccessAction())
+          .then((_) => {
+            this._router.navigate(HOME);
+            return featureAction.loginSuccessAction();
+          })
           .catch((error) => {
             const message =
               error.code === FIREBASE_USER_NOT_FOUND ||
