@@ -6,6 +6,19 @@ export const loginReducer = createReducer(
   INITIAL_LOGIN_STATE,
   on(action.loginAction, (state) => ({
     ...state,
-    isLoggedIn: true
+    working: true,
+    completed: false
+  })),
+  on(action.loginSuccessAction, (state) => ({
+    ...state,
+    isLoggedIn: true,
+    working: false,
+    completed: true
+  })),
+  on(action.loginErrorAction, (state) => ({
+    ...state,
+    isLoggedIn: false,
+    working: false,
+    completed: false
   }))
 );

@@ -13,8 +13,14 @@ import { TranslateModule } from '@ngx-translate/core';
 import { TRANSLATE_CONFIG } from '@core/configs/translate.config';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { EffectsModule } from '@ngrx/effects';
-import { APP_REDUCER } from '@state/app.reducer';
+import { APP_REDUCERS } from '@state/app.reducer';
 import { INITIAL_APP_STATE } from '@state/app.state';
+import { AngularFireModule } from '@angular/fire';
+import { environment } from 'environments/environment';
+import { AngularFireDatabaseModule } from '@angular/fire/database';
+import { AngularFireAuthModule } from '@angular/fire/auth';
+import { APP_EFFECTS } from '@state/app.effect';
+import { UserService } from '@modules/user/services/user.service';
 
 registerLocaleData(es_CO);
 
@@ -27,16 +33,20 @@ registerLocaleData(es_CO);
     HttpClientModule,
     BrowserAnimationsModule,
     TranslateModule.forRoot(TRANSLATE_CONFIG),
-    StoreModule.forRoot(APP_REDUCER),
+    AngularFireModule.initializeApp(environment.firebaseConfig),
+    AngularFireAuthModule,
+    AngularFireDatabaseModule,
+    StoreModule.forRoot(APP_REDUCERS),
     StoreDevtoolsModule.instrument({ maxAge: 25 }),
-    EffectsModule.forRoot([])
+    EffectsModule.forRoot(APP_EFFECTS)
   ],
   providers: [
     { provide: NZ_I18N, useValue: es_ES },
     {
       provide: INITIAL_STATE,
       useValue: INITIAL_APP_STATE
-    }
+    },
+    UserService
   ],
   bootstrap: [AppComponent]
 })

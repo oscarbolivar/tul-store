@@ -13,7 +13,7 @@ export class UserFacade {
     select(selector.isLoggedIn)
   );
 
-  public login(): void {
-    this._store.dispatch(action.loginAction());
+  public login(email: string, password: string): void {
+    this._store.dispatch(action.loginAction({ email, password }));
   }
 }

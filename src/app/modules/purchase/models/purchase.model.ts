@@ -6,7 +6,7 @@ export enum CartStatus {
 }
 
 export interface Cart {
-  id: number;
+  id: string;
   status: CartStatus;
 }
 

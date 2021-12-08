@@ -14,12 +14,12 @@
           (ngSubmit)="submit()">
 
           <nz-form-item class="login__field">
-            <nz-form-control nzErrorTip="{{ 'USER.LOGIN.VALIDATIONS.USERNAME_REQUIRED' | translate }}">
+            <nz-form-control nzErrorTip="{{ 'USER.LOGIN.VALIDATIONS.EMAIL_REQUIRED' | translate }}">
               <nz-input-group nzPrefixIcon="user">
                 <input
                   nz-input
-                  formControlName="userName"
-                  placeholder="{{ 'USER.LOGIN.FORM.USERNAME' | translate }}">
+                  formControlName="email"
+                  placeholder="{{ 'USER.LOGIN.FORM.EMAIL' | translate }}">
               </nz-input-group>
             </nz-form-control>
           </nz-form-item>

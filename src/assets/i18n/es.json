@@ -3,12 +3,12 @@
   "USER": {
     "LOGIN": {
       "FORM": {
-        "USERNAME": "Nombre de usuario",
+        "EMAIL": "Correo electrónico",
         "PASSWORD": "Contraseña",
         "LOGIN_ACTION": "Iniciar sesión"
       },
       "VALIDATIONS": {
-        "USERNAME_REQUIRED": "Requerimos tu nombre de usuario",
+        "EMAIL_REQUIRED": "Requerimos tu correo electrónico",
         "PASSWORD_REQUIRED": "Tu contraseña es obligatoria"
       }
     }

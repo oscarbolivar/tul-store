@@ -15,14 +15,16 @@ export class LoginComponent implements OnInit {
 
   ngOnInit(): void {
     this.formGroup = this._formBuilder.group({
-      userName: [null, [Validators.required]],
+      email: [null, [Validators.required]],
       password: [null, [Validators.required]]
     });
   }
 
   public submit(): void {
-    console.log('submit', this.formGroup.value);
-    this._facade.login();
+    this._facade.login(
+      this.formGroup.value.email,
+      this.formGroup.value.password
+    );
   }
 
   get isDisabled(): boolean {
