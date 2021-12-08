@@ -8,7 +8,7 @@ function httpLoaderFactory(http: HttpClient): TranslateHttpLoader {
   return new TranslateHttpLoader(http);
 }
 
-export const translateConfig = {
+export const TRANSLATE_CONFIG = {
   defaultLanguage,
   loader: {
     provide: TranslateLoader,
