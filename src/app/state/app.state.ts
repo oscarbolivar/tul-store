@@ -1,4 +1,4 @@
-import { INITIAL_LOGIN_STATE, LoginState } from './user/login/login.state';
+import { INITIAL_LOGIN_STATE, LoginState } from './auth/login/login.state';
 
 export interface AppState {
   login: LoginState;

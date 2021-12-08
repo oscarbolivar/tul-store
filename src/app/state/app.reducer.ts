@@ -1,3 +1,3 @@
-import { loginReducer } from '@state/user/login/login.reducer';
+import { loginReducer } from '@state/auth/login/login.reducer';
 
-export const APP_REDUCER = { login: loginReducer };
+export const APP_REDUCERS = { login: loginReducer };

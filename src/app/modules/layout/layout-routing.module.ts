@@ -8,8 +8,8 @@ const routes: Routes = [
     component: LayoutComponent
   },
   {
-    path: 'user',
-    loadChildren: () => import('../user/user.module').then((m) => m.UserModule)
+    path: 'auth',
+    loadChildren: () => import('../auth/auth.module').then((m) => m.AuthModule)
   },
   {
     path: 'purchase',
