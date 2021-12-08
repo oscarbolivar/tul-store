@@ -14,8 +14,10 @@ export class LoginComponent implements OnInit {
   constructor(private _formBuilder: FormBuilder, private _facade: AuthFacade) {}
 
   ngOnInit(): void {
+    this._facade.isUserLoggedIn();
+
     this.formGroup = this._formBuilder.group({
-      email: [null, [Validators.required]],
+      email: [null, [Validators.required, Validators.email]],
       password: [null, [Validators.required]]
     });
   }
@@ -31,7 +33,15 @@ export class LoginComponent implements OnInit {
     return !this.formGroup.valid;
   }
 
-  get isLoggedIn$(): Observable<boolean> {
-    return this._facade.isLoggedIn$;
+  get working$(): Observable<boolean> {
+    return this._facade.working$;
+  }
+
+  get completed$(): Observable<boolean> {
+    return this._facade.completed$;
+  }
+
+  get message$(): Observable<string> {
+    return this._facade.message$;
   }
 }

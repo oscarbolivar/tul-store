@@ -4,6 +4,10 @@ import * as action from './login.actions';
 
 export const loginReducer = createReducer(
   INITIAL_LOGIN_STATE,
+  on(action.isUserLoggedInSuccessAction, (state, { isLoggedIn }) => ({
+    ...state,
+    isLoggedIn
+  })),
   on(action.loginAction, (state) => ({
     ...state,
     working: true,
@@ -11,14 +15,14 @@ export const loginReducer = createReducer(
   })),
   on(action.loginSuccessAction, (state) => ({
     ...state,
-    isLoggedIn: true,
     working: false,
-    completed: true
+    completed: true,
+    message: ''
   })),
-  on(action.loginErrorAction, (state) => ({
+  on(action.loginErrorAction, (state, { message }) => ({
     ...state,
-    isLoggedIn: false,
     working: false,
-    completed: false
+    completed: false,
+    message
   }))
 );

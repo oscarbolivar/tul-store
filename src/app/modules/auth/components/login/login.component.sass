@@ -1,3 +1,5 @@
+@import '../../../../../styles'
+
 .login
   display: flex
   align-items: center
@@ -9,7 +11,12 @@
     padding: 60px 30px
     max-width: 400px
 
+    .login__title
+      padding: 0 0 36px 0
+
     .login__field
       margin-bottom: 30px
       &:last-child
         margin-bottom: 0
+      &--error
+        color: $error

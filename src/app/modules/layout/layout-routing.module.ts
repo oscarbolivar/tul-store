@@ -5,16 +5,14 @@ import { LayoutComponent } from '@modules/layout/components/layout/layout.compon
 const routes: Routes = [
   {
     path: '',
-    component: LayoutComponent
-  },
-  {
-    path: 'auth',
-    loadChildren: () => import('../auth/auth.module').then((m) => m.AuthModule)
-  },
-  {
-    path: 'purchase',
-    loadChildren: () =>
-      import('../purchase/purchase.module').then((m) => m.PurchaseModule)
+    component: LayoutComponent,
+    children: [
+      {
+        path: 'purchase',
+        loadChildren: () =>
+          import('../purchase/purchase.module').then((m) => m.PurchaseModule)
+      }
+    ]
   }
 ];
 

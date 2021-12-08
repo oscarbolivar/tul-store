@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { AuthFacade } from '@modules/auth/facade/auth.facade';
 
 @Component({
   selector: 'app-layout',
@@ -6,7 +7,9 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./layout.component.sass']
 })
 export class LayoutComponent implements OnInit {
-  constructor() {}
+  constructor(private _authFacade: AuthFacade) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this._authFacade.isUserLoggedIn();
+  }
 }

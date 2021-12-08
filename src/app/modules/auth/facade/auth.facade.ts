@@ -13,6 +13,22 @@ export class AuthFacade {
     select(selector.isLoggedIn)
   );
 
+  public working$: Observable<boolean> = this._store.pipe(
+    select(selector.working)
+  );
+
+  public completed$: Observable<boolean> = this._store.pipe(
+    select(selector.completed)
+  );
+
+  public message$: Observable<string> = this._store.pipe(
+    select(selector.message)
+  );
+
+  public isUserLoggedIn(): void {
+    this._store.dispatch(action.isUserLoggedInAction());
+  }
+
   public login(email: string, password: string): void {
     this._store.dispatch(action.loginAction({ email, password }));
   }
