@@ -1,25 +1,25 @@
 import { createSelector } from '@ngrx/store';
 import { AppState } from '@state/app.state';
-import { LoginState } from '@state/auth/login/login.state';
+import { AuthState } from '@state/auth/auth.state';
 
-const loginFeature = (state: AppState) => state.login;
+const loginFeature = (state: AppState) => state.auth;
 
 export const isLoggedIn = createSelector(
   loginFeature,
-  (state: LoginState) => state.isLoggedIn
+  (state: AuthState) => state.isLoggedIn
 );
 
 export const working = createSelector(
   loginFeature,
-  (state: LoginState) => state.working
+  (state: AuthState) => state.working
 );
 
 export const completed = createSelector(
   loginFeature,
-  (state: LoginState) => state.completed
+  (state: AuthState) => state.completed
 );
 
 export const message = createSelector(
   loginFeature,
-  (state: LoginState) => state.message
+  (state: AuthState) => state.message
 );

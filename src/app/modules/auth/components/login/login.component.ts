@@ -30,6 +30,7 @@ export class LoginComponent {
   }
 
   public goToRegister(): void {
+    this._facade.reset();
     this._router.navigate(AUTH_REGISTER);
   }
 

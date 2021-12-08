@@ -18,6 +18,7 @@ export class RegisterComponent {
   }
 
   public goToLogin(): void {
+    this._facade.reset();
     this._router.navigate(AUTH_LOGIN);
   }
 

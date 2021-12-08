@@ -7,9 +7,10 @@
         "PASSWORD": "Contraseña"
       },
       "VALIDATIONS": {
-        "EMAIL_REQUIRED": "Ingresa un correo electrónico válido.",
-        "EMAIL_MALFORMED": "Ingresa un correo electrónico válido.",
-        "PASSWORD_REQUIRED": "Tu contraseña es obligatoria."
+        "REQUIRED_EMAIL": "Ingresa un correo electrónico válido.",
+        "INVALID_EMAIL": "Ingresa un correo electrónico válido.",
+        "WEAK_PASSWORD": "La contraseña es muy débil.",
+        "REQUIRED_PASSWORD": "Tu contraseña es obligatoria."
       },
       "MESSAGES": {
         "UNKNOWN_ERROR": "Ocurrió un error inesperado."

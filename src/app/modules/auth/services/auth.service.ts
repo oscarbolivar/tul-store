@@ -10,10 +10,6 @@ export class AuthService {
 
   constructor(private _auth: AngularFireAuth) {}
 
-  public login(email: string, password: string): Promise<UserCredential> {
-    return this._auth.signInWithEmailAndPassword(email, password);
-  }
-
   public isUserLoggedIn$(): Observable<firebase.User | null> {
     const status = new BehaviorSubject(this.currentUser);
     this._auth
@@ -22,5 +18,13 @@ export class AuthService {
       })
       .then();
     return status.asObservable();
+  }
+
+  public login(email: string, password: string): Promise<UserCredential> {
+    return this._auth.signInWithEmailAndPassword(email, password);
+  }
+
+  public register(email: string, password: string): Promise<UserCredential> {
+    return this._auth.createUserWithEmailAndPassword(email, password);
   }
 }

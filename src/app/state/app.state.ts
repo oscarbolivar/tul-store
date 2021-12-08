@@ -1,9 +1,9 @@
-import { INITIAL_LOGIN_STATE, LoginState } from './auth/login/login.state';
+import { INITIAL_AUTH_STATE, AuthState } from './auth/auth.state';
 
 export interface AppState {
-  login: LoginState;
+  auth: AuthState;
 }
 
 export const INITIAL_APP_STATE = {
-  login: INITIAL_LOGIN_STATE
+  auth: INITIAL_AUTH_STATE
 };
