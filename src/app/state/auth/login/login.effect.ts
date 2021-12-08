@@ -1,12 +1,12 @@
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
-import { UserService } from '@modules/user/services/user.service';
-import * as featureAction from '@state/user/login/login.actions';
+import { AuthService } from '@modules/auth/services/auth.service';
+import * as featureAction from '@state/auth/login/login.actions';
 import { switchMap } from 'rxjs/operators';
 
 @Injectable()
 export class LoginEffect {
-  constructor(private _actions$: Actions, private _service: UserService) {}
+  constructor(private _actions$: Actions, private _service: AuthService) {}
 
   public login$ = createEffect(() =>
     this._actions$.pipe(

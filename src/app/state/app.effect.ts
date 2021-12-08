@@ -1,3 +1,3 @@
-import { LoginEffect } from '@state/user/login/login.effect';
+import { LoginEffect } from '@state/auth/login/login.effect';
 
 export const APP_EFFECTS = [LoginEffect];

@@ -14,24 +14,24 @@
           (ngSubmit)="submit()">
 
           <nz-form-item class="login__field">
-            <nz-form-control nzErrorTip="{{ 'USER.LOGIN.VALIDATIONS.EMAIL_REQUIRED' | translate }}">
+            <nz-form-control nzErrorTip="{{ 'AUTH.LOGIN.VALIDATIONS.EMAIL_REQUIRED' | translate }}">
               <nz-input-group nzPrefixIcon="user">
                 <input
                   nz-input
                   formControlName="email"
-                  placeholder="{{ 'USER.LOGIN.FORM.EMAIL' | translate }}">
+                  placeholder="{{ 'AUTH.LOGIN.FORM.EMAIL' | translate }}">
               </nz-input-group>
             </nz-form-control>
           </nz-form-item>
 
           <nz-form-item class="login__field">
-            <nz-form-control nzErrorTip="{{ 'USER.LOGIN.VALIDATIONS.PASSWORD_REQUIRED' | translate }}">
+            <nz-form-control nzErrorTip="{{ 'AUTH.LOGIN.VALIDATIONS.PASSWORD_REQUIRED' | translate }}">
               <nz-input-group nzPrefixIcon="lock">
                 <input
                   nz-input
                   formControlName="password"
                   type="password"
-                  placeholder="{{ 'USER.LOGIN.FORM.PASSWORD' | translate }}">
+                  placeholder="{{ 'AUTH.LOGIN.FORM.PASSWORD' | translate }}">
               </nz-input-group>
             </nz-form-control>
           </nz-form-item>
@@ -42,7 +42,7 @@
                 nz-button
                 nzType="primary"
                 [disabled]="isDisabled">
-                {{ 'USER.LOGIN.FORM.LOGIN_ACTION' | translate }}
+                {{ 'AUTH.LOGIN.FORM.LOGIN_ACTION' | translate }}
               </button>
             </nz-form-control>
           </nz-form-item>

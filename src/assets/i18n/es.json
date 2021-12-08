@@ -1,6 +1,6 @@
 {
   "APP_TITLE": "TulStore",
-  "USER": {
+  "AUTH": {
     "LOGIN": {
       "FORM": {
         "EMAIL": "Correo electrónico",

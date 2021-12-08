@@ -20,7 +20,7 @@ import { environment } from 'environments/environment';
 import { AngularFireDatabaseModule } from '@angular/fire/database';
 import { AngularFireAuthModule } from '@angular/fire/auth';
 import { APP_EFFECTS } from '@state/app.effect';
-import { UserService } from '@modules/user/services/user.service';
+import { AuthService } from '@modules/auth/services/auth.service';
 
 registerLocaleData(es_CO);
 
@@ -46,7 +46,7 @@ registerLocaleData(es_CO);
       provide: INITIAL_STATE,
       useValue: INITIAL_APP_STATE
     },
-    UserService
+    AuthService
   ],
   bootstrap: [AppComponent]
 })

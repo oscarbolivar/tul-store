@@ -1,6 +1,6 @@
 import { createSelector } from '@ngrx/store';
 import { AppState } from '@state/app.state';
-import { LoginState } from '@state/user/login/login.state';
+import { LoginState } from '@state/auth/login/login.state';
 
 const loginFeature = (state: AppState) => state.login;
 

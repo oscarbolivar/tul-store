@@ -1,22 +1,22 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { UserRoutingModule } from '@modules/user/user-routing.module';
+import { AuthRoutingModule } from '@modules/auth/auth-routing.module';
 import { LoginComponent } from './components/login/login.component';
 import { NzLayoutModule } from 'ng-zorro-antd/layout';
-import { UserContainer } from './container/user.container';
+import { AuthContainer } from './container/auth.container';
 import { NzFormModule } from 'ng-zorro-antd/form';
 import { NzInputModule } from 'ng-zorro-antd/input';
 import { ReactiveFormsModule } from '@angular/forms';
 import { TranslateModule } from '@ngx-translate/core';
 import { NzButtonModule } from 'ng-zorro-antd/button';
-import { UserFacade } from '@modules/user/facade/user.facade';
+import { AuthFacade } from '@modules/auth/facade/auth.facade';
 import { NzPageHeaderModule } from 'ng-zorro-antd/page-header';
 
 @NgModule({
-  declarations: [LoginComponent, UserContainer],
+  declarations: [LoginComponent, AuthContainer],
   imports: [
     CommonModule,
-    UserRoutingModule,
+    AuthRoutingModule,
     NzLayoutModule,
     NzFormModule,
     NzInputModule,
@@ -25,6 +25,6 @@ import { NzPageHeaderModule } from 'ng-zorro-antd/page-header';
     NzButtonModule,
     NzPageHeaderModule
   ],
-  providers: [UserFacade]
+  providers: [AuthFacade]
 })
-export class UserModule {}
+export class AuthModule {}
