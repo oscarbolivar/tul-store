@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { APP_INITIALIZER, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -21,10 +21,18 @@ import { AngularFireDatabaseModule } from '@angular/fire/database';
 import { AngularFireAuthModule } from '@angular/fire/auth';
 import { APP_EFFECTS } from '@state/app.effect';
 import { AuthService } from '@modules/auth/services/auth.service';
+import { AuthFacade } from '@modules/auth/facade/auth.facade';
 
 registerLocaleData(es_CO);
 
+export function initializeApp(authFacade: AuthFacade): () => void {
+  return (): void => {
+    return authFacade.isUserLoggedIn();
+  };
+}
+
 @NgModule({
+  bootstrap: [AppComponent],
   declarations: [AppComponent],
   imports: [
     BrowserModule,
@@ -41,13 +49,19 @@ registerLocaleData(es_CO);
     EffectsModule.forRoot(APP_EFFECTS)
   ],
   providers: [
+    AuthService,
+    AuthFacade,
     { provide: NZ_I18N, useValue: es_ES },
     {
       provide: INITIAL_STATE,
       useValue: INITIAL_APP_STATE
     },
-    AuthService
-  ],
-  bootstrap: [AppComponent]
+    {
+      provide: APP_INITIALIZER,
+      useFactory: initializeApp,
+      multi: true,
+      deps: [AuthFacade]
+    }
+  ]
 })
 export class AppModule {}

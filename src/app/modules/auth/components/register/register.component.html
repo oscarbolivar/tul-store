@@ -1,0 +1,9 @@
+<app-user-form
+  [title]="'AUTH.REGISTER.FORM.TITLE'"
+  [buttonTitle]="'AUTH.REGISTER.FORM.REGISTER_ACTION'"
+  [goToTitle]="'AUTH.REGISTER.FORM.LOGIN_ACTION'"
+  [working]="working$ | async"
+  [completed]="completed$ | async"
+  [message]="message$ | async"
+  (onSubmit)="register($event)"
+  (onGoTo)="goToLogin()"></app-user-form>

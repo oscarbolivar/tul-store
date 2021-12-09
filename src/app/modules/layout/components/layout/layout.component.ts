@@ -1,4 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { AuthFacade } from '@modules/auth/facade/auth.facade';
+import { Router } from '@angular/router';
+import { SESSION_EMAIL } from '@core/constants/session-storage';
+import { userIsLoggedIn } from '@core/helpers/app.helpers';
 
 @Component({
   selector: 'app-layout',
@@ -6,7 +10,17 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./layout.component.sass']
 })
 export class LayoutComponent implements OnInit {
-  constructor() {}
+  constructor(private _authFacade: AuthFacade, private _router: Router) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    userIsLoggedIn(this._router);
+  }
+
+  public signOut(): void {
+    this._authFacade.signOut();
+  }
+
+  get sessionEmail(): string | null {
+    return sessionStorage.getItem(SESSION_EMAIL);
+  }
 }

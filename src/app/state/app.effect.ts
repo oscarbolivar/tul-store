@@ -1,3 +1,3 @@
-import { LoginEffect } from '@state/auth/login/login.effect';
+import { AuthEffect } from '@state/auth/auth.effect';
 
-export const APP_EFFECTS = [LoginEffect];
+export const APP_EFFECTS = [AuthEffect];

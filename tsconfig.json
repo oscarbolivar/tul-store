@@ -22,11 +22,5 @@
       "@core/*": ["app/core/*"],
       "@state/*": ["app/state/*"]
     }
-  },
-  "angularCompilerOptions": {
-    "enableI18nLegacyMessageIdFormat": false,
-    "strictInjectionParameters": true,
-    "strictInputAccessModifiers": true,
-    "strictTemplates": true
   }
 }

@@ -11,9 +11,18 @@ import { TranslateModule } from '@ngx-translate/core';
 import { NzButtonModule } from 'ng-zorro-antd/button';
 import { AuthFacade } from '@modules/auth/facade/auth.facade';
 import { NzPageHeaderModule } from 'ng-zorro-antd/page-header';
+import { NzSpinModule } from 'ng-zorro-antd/spin';
+import { NzAnchorModule } from 'ng-zorro-antd/anchor';
+import { RegisterComponent } from './components/register/register.component';
+import { UserFormComponent } from './components/shared/user-form/user-form.component';
 
 @NgModule({
-  declarations: [LoginComponent, AuthContainer],
+  declarations: [
+    LoginComponent,
+    AuthContainer,
+    RegisterComponent,
+    UserFormComponent
+  ],
   imports: [
     CommonModule,
     AuthRoutingModule,
@@ -23,7 +32,9 @@ import { NzPageHeaderModule } from 'ng-zorro-antd/page-header';
     ReactiveFormsModule,
     TranslateModule,
     NzButtonModule,
-    NzPageHeaderModule
+    NzPageHeaderModule,
+    NzSpinModule,
+    NzAnchorModule
   ],
   providers: [AuthFacade]
 })

@@ -1,30 +1,25 @@
 import { Component } from '@angular/core';
 import { AuthFacade } from '@modules/auth/facade/auth.facade';
-import { Observable } from 'rxjs';
 import { Router } from '@angular/router';
-import { AUTH_REGISTER } from '@core/constants/routes';
+import { Observable } from 'rxjs';
+import { HOME } from '@core/constants/routes';
 import { User } from '@modules/auth/models/auth.model';
-import { userIsLoggedIn } from '@core/helpers/app.helpers';
 
 @Component({
-  selector: 'app-login',
-  templateUrl: './login.component.html',
-  styleUrls: ['./login.component.sass']
+  selector: 'app-register',
+  templateUrl: './register.component.html',
+  styleUrls: ['./register.component.sass']
 })
-export class LoginComponent {
+export class RegisterComponent {
   constructor(private _facade: AuthFacade, private _router: Router) {}
 
-  public isUserLoggedIn(): void {
-    userIsLoggedIn(this._router);
+  public register(user: User): void {
+    this._facade.register(user.email, user.password);
   }
 
-  public login(user: User): void {
-    this._facade.login(user.email, user.password);
-  }
-
-  public goToRegister(): void {
+  public goToLogin(): void {
     this._facade.reset();
-    this._router.navigate(AUTH_REGISTER);
+    this._router.navigate(HOME);
   }
 
   get working$(): Observable<boolean> {

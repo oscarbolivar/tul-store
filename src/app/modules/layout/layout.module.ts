@@ -5,6 +5,7 @@ import { LayoutComponent } from '@modules/layout/components/layout/layout.compon
 import { LayoutRoutingModule } from '@modules/layout/layout-routing.module';
 import { NzMenuModule } from 'ng-zorro-antd/menu';
 import { TranslateModule } from '@ngx-translate/core';
+import { AuthFacade } from '@modules/auth/facade/auth.facade';
 
 @NgModule({
   declarations: [LayoutComponent],
@@ -14,6 +15,7 @@ import { TranslateModule } from '@ngx-translate/core';
     NzLayoutModule,
     NzMenuModule,
     TranslateModule
-  ]
+  ],
+  providers: [AuthFacade]
 })
 export class LayoutModule {}

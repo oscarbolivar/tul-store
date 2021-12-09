@@ -1,0 +1,70 @@
+<div class="user-form">
+
+  <nz-layout class="user-form__layout">
+    <nz-content>
+
+      <nz-page-header
+        nzTitle="{{ title | translate }}"
+        class="user-form__title"></nz-page-header>
+
+      <form
+        nz-form
+        [nzLayout]="'horizontal'"
+        [formGroup]="formGroup"
+        (ngSubmit)="submit()">
+
+        <nz-form-item class="user-form__field">
+          <nz-form-control
+            nzErrorTip="{{ 'AUTH.USER_FORM.VALIDATIONS.REQUIRED_EMAIL' | translate }}">
+            <nz-input-group nzPrefixIcon="user">
+              <input
+                nz-input
+                formControlName="email"
+                placeholder="{{ 'AUTH.USER_FORM.FORM.EMAIL' | translate }}">
+            </nz-input-group>
+          </nz-form-control>
+        </nz-form-item>
+
+        <nz-form-item class="user-form__field">
+          <nz-form-control nzErrorTip="{{ 'AUTH.USER_FORM.VALIDATIONS.REQUIRED_PASSWORD' | translate }}">
+            <nz-input-group nzPrefixIcon="lock">
+              <input
+                nz-input
+                formControlName="password"
+                type="password"
+                placeholder="{{ 'AUTH.USER_FORM.FORM.PASSWORD' | translate }}">
+            </nz-input-group>
+          </nz-form-control>
+        </nz-form-item>
+
+        <nz-form-item class="user-form__field">
+          <nz-form-control class="user-form__actions">
+            <button
+              nz-button
+              nzType="primary"
+              [disabled]="isDisabled">
+              {{ buttonTitle | translate }}
+            </button>
+
+            <a (click)="goTo()">{{ goToTitle | translate }}</a>
+          </nz-form-control>
+        </nz-form-item>
+
+        <nz-form-item
+          *ngIf="!working && !completed && !!message"
+          class="user-form__field">
+          <span class="user-form__field--error">{{ message }}</span>
+        </nz-form-item>
+
+        <div
+          *ngIf="working && !completed"
+          class="user-form--loading">
+          <nz-spin nzSimple></nz-spin>
+        </div>
+
+      </form>
+
+    </nz-content>
+  </nz-layout>
+
+</div>

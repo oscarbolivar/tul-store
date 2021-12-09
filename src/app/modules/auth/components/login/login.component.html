@@ -1,54 +1,11 @@
-<div class="login">
-
-  <nz-page-header nzTitle="{{ 'APP_TITLE' | translate }}"></nz-page-header>
-
-  <nz-layout class="login__layout">
-    <nz-content>
-
-      {{isLoggedIn$ | async}}
-
-        <form
-          nz-form
-          [nzLayout]="'vertical'"
-          [formGroup]="formGroup"
-          (ngSubmit)="submit()">
-
-          <nz-form-item class="login__field">
-            <nz-form-control nzErrorTip="{{ 'AUTH.LOGIN.VALIDATIONS.EMAIL_REQUIRED' | translate }}">
-              <nz-input-group nzPrefixIcon="user">
-                <input
-                  nz-input
-                  formControlName="email"
-                  placeholder="{{ 'AUTH.LOGIN.FORM.EMAIL' | translate }}">
-              </nz-input-group>
-            </nz-form-control>
-          </nz-form-item>
-
-          <nz-form-item class="login__field">
-            <nz-form-control nzErrorTip="{{ 'AUTH.LOGIN.VALIDATIONS.PASSWORD_REQUIRED' | translate }}">
-              <nz-input-group nzPrefixIcon="lock">
-                <input
-                  nz-input
-                  formControlName="password"
-                  type="password"
-                  placeholder="{{ 'AUTH.LOGIN.FORM.PASSWORD' | translate }}">
-              </nz-input-group>
-            </nz-form-control>
-          </nz-form-item>
-
-          <nz-form-item class="login__field">
-            <nz-form-control>
-              <button
-                nz-button
-                nzType="primary"
-                [disabled]="isDisabled">
-                {{ 'AUTH.LOGIN.FORM.LOGIN_ACTION' | translate }}
-              </button>
-            </nz-form-control>
-          </nz-form-item>
-
-        </form>
-
-    </nz-content>
-  </nz-layout>
-</div>
+<app-user-form
+  [isLogin]="true"
+  [title]="'AUTH.LOGIN.FORM.TITLE'"
+  [buttonTitle]="'AUTH.LOGIN.FORM.LOGIN_ACTION'"
+  [goToTitle]="'AUTH.LOGIN.FORM.REGISTER_ACTION'"
+  [working]="working$ | async"
+  [completed]="completed$ | async"
+  [message]="message$ | async"
+  (isUserLoggedIn)="isUserLoggedIn()"
+  (onSubmit)="login($event)"
+  (onGoTo)="goToRegister()"></app-user-form>
