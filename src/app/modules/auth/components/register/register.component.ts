@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { AuthFacade } from '@modules/auth/facade/auth.facade';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
-import { AUTH_LOGIN } from '@core/constants/routes';
+import { HOME } from '@core/constants/routes';
 import { User } from '@modules/auth/models/auth.model';
 
 @Component({
@@ -19,7 +19,7 @@ export class RegisterComponent {
 
   public goToLogin(): void {
     this._facade.reset();
-    this._router.navigate(AUTH_LOGIN);
+    this._router.navigate(HOME);
   }
 
   get working$(): Observable<boolean> {

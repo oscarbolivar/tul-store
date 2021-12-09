@@ -12,25 +12,54 @@ export const authReducer = createReducer(
     ...state,
     isLoggedIn
   })),
-  on(action.loginAction, action.registerAction, (state) => ({
+  on(
+    action.loginAction,
+    action.signOutAction,
+    action.registerAction,
+    (state) => ({
+      ...state,
+      working: true,
+      completed: false
+    })
+  ),
+  on(action.loginSuccessAction, (state) => ({
     ...state,
-    working: true,
-    completed: false
+    isLoggedIn: true,
+    working: false,
+    completed: true,
+    message: ''
   })),
-  on(action.loginSuccessAction, action.registerSuccessAction, (state) => ({
+  on(action.loginErrorAction, (state, { message }) => ({
+    ...state,
+    isLoggedIn: false,
+    working: false,
+    completed: false,
+    message
+  })),
+  on(action.signOutSuccessAction, (state) => ({
+    ...state,
+    isLoggedIn: false,
+    working: false,
+    completed: true,
+    message: ''
+  })),
+  on(action.signOutErrorAction, (state, { message }) => ({
+    ...state,
+    isLoggedIn: true,
+    working: false,
+    completed: false,
+    message
+  })),
+  on(action.registerSuccessAction, (state) => ({
     ...state,
     working: false,
     completed: true,
     message: ''
   })),
-  on(
-    action.loginErrorAction,
-    action.registerErrorAction,
-    (state, { message }) => ({
-      ...state,
-      working: false,
-      completed: false,
-      message
-    })
-  )
+  on(action.registerErrorAction, (state, { message }) => ({
+    ...state,
+    working: false,
+    completed: false,
+    message
+  }))
 );

@@ -3,6 +3,7 @@ import { AuthFacade } from '@modules/auth/facade/auth.facade';
 import { Observable } from 'rxjs';
 import { Router } from '@angular/router';
 import { AUTH_LOGIN, HOME } from '@core/constants/routes';
+import { SESSION_EMAIL } from '@core/constants/session-storage';
 
 @Component({
   selector: 'app-layout',
@@ -24,6 +25,14 @@ export class LayoutComponent implements OnInit, AfterViewInit {
         })
         .unsubscribe();
     }, 600);
+  }
+
+  public signOut(): void {
+    this._authFacade.signOut();
+  }
+
+  get sessionEmail(): string | null {
+    return sessionStorage.getItem(SESSION_EMAIL);
   }
 
   get isLoggedIn$(): Observable<boolean> {

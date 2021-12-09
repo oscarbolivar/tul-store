@@ -25,6 +25,17 @@ export const loginErrorAction = createAction(
   props<{ message: string }>()
 );
 
+export const signOutAction = createAction('[Auth] Sign Out User');
+
+export const signOutSuccessAction = createAction(
+  '[Auth] Sign Out User - Success'
+);
+
+export const signOutErrorAction = createAction(
+  '[Auth] Sign Out User - Error',
+  props<{ message: string }>()
+);
+
 export const registerAction = createAction(
   '[Auth] Register User',
   props<{ email: string; password: string }>()

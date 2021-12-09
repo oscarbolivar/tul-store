@@ -37,6 +37,10 @@ export class AuthFacade {
     this._store.dispatch(action.loginAction({ email, password }));
   }
 
+  public signOut(): void {
+    this._store.dispatch(action.signOutAction());
+  }
+
   public register(email: string, password: string): void {
     this._store.dispatch(action.registerAction({ email, password }));
   }

@@ -13,6 +13,7 @@ import {
 import { of } from 'rxjs';
 import { Router } from '@angular/router';
 import { AUTH_LOGIN, HOME } from '@core/constants/routes';
+import { SESSION_EMAIL } from '@core/constants/session-storage';
 
 @Injectable()
 export class AuthEffect {
@@ -26,7 +27,7 @@ export class AuthEffect {
   public isUserLoggedIn$ = createEffect(() =>
     this._actions$.pipe(
       ofType(featureAction.isUserLoggedInAction),
-      switchMap((_) =>
+      switchMap(() =>
         this._service.isUserLoggedIn$().pipe(
           filter((user) => user !== undefined),
           map((user) => {
@@ -46,8 +47,9 @@ export class AuthEffect {
       switchMap((action) =>
         this._service
           .login(action.email, action.password)
-          .then((_) => {
+          .then(() => {
             this._router.navigate(HOME);
+            sessionStorage.setItem(SESSION_EMAIL, action.email);
             return featureAction.loginSuccessAction();
           })
           .catch((error) => {
@@ -65,14 +67,35 @@ export class AuthEffect {
     )
   );
 
+  public signOut$ = createEffect(() =>
+    this._actions$.pipe(
+      ofType(featureAction.signOutAction),
+      switchMap(() =>
+        this._service
+          .signOut()
+          .then(() => {
+            this._router.navigate(AUTH_LOGIN);
+            sessionStorage.removeItem(SESSION_EMAIL);
+            return featureAction.signOutSuccessAction();
+          })
+          .catch(() =>
+            featureAction.signOutErrorAction({
+              message: 'AUTH.USER_FORM.MESSAGES.UNKNOWN_ERROR'
+            })
+          )
+      )
+    )
+  );
+
   public register$ = createEffect(() =>
     this._actions$.pipe(
       ofType(featureAction.registerAction),
       switchMap((action) =>
         this._service
           .register(action.email, action.password)
-          .then((_) => {
+          .then(() => {
             this._router.navigate(AUTH_LOGIN);
+            sessionStorage.setItem(SESSION_EMAIL, action.email);
             return featureAction.registerSuccessAction();
           })
           .catch((error) => {
