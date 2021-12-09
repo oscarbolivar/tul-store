@@ -15,7 +15,6 @@ export class LoginComponent {
   constructor(private _facade: AuthFacade, private _router: Router) {}
 
   public isUserLoggedIn(): void {
-    this._facade.isUserLoggedIn();
     userIsLoggedIn(this._router);
   }
 

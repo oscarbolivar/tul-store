@@ -1,25 +1,17 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { AuthFacade } from '@modules/auth/facade/auth.facade';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { HOME } from '@core/constants/routes';
 import { User } from '@modules/auth/models/auth.model';
-import {
-  IS_LOGGED_IN,
-  SESSION_IS_LOGGED_IN
-} from '@core/constants/session-storage';
 
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',
   styleUrls: ['./register.component.sass']
 })
-export class RegisterComponent implements OnInit {
+export class RegisterComponent {
   constructor(private _facade: AuthFacade, private _router: Router) {}
-
-  ngOnInit(): void {
-    sessionStorage.setItem(SESSION_IS_LOGGED_IN, IS_LOGGED_IN.NO);
-  }
 
   public register(user: User): void {
     this._facade.register(user.email, user.password);

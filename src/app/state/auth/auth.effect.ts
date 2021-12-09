@@ -5,6 +5,7 @@ import * as featureAction from '@state/auth/auth.actions';
 import { catchError, filter, map, switchMap } from 'rxjs/operators';
 import { TranslateService } from '@ngx-translate/core';
 import {
+  FIREBASE_EMAIL_ALREADY_IN_USE,
   FIREBASE_INVALID_EMAIL,
   FIREBASE_USER_NOT_FOUND,
   FIREBASE_WEAK_PASSWORD,
@@ -60,7 +61,6 @@ export class AuthEffect {
             return featureAction.loginSuccessAction();
           })
           .catch((error) => {
-            sessionStorage.setItem(SESSION_IS_LOGGED_IN, IS_LOGGED_IN.NO);
             const message = this._translate.instant(
               error.code === FIREBASE_USER_NOT_FOUND ||
                 error.code === FIREBASE_WRONG_PASSWORD
@@ -114,6 +114,8 @@ export class AuthEffect {
                 ? 'AUTH.USER_FORM.VALIDATIONS.WEAK_PASSWORD'
                 : error.code === FIREBASE_INVALID_EMAIL
                 ? 'AUTH.USER_FORM.VALIDATIONS.INVALID_EMAIL'
+                : error.code === FIREBASE_EMAIL_ALREADY_IN_USE
+                ? 'AUTH.USER_FORM.VALIDATIONS.EMAIL_ALREADY_IN_USE'
                 : 'AUTH.USER_FORM.MESSAGES.UNKNOWN_ERROR'
             );
             return featureAction.registerErrorAction({ message });

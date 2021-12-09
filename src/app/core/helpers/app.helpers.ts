@@ -6,8 +6,9 @@ import { AUTH_LOGIN, HOME } from '@core/constants/routes';
 import { Router } from '@angular/router';
 
 export function userIsLoggedIn(router: Router): void {
-  setTimeout(() => {
-    const isLoggedIn = sessionStorage.getItem(SESSION_IS_LOGGED_IN);
-    router.navigate(isLoggedIn === IS_LOGGED_IN.YES ? HOME : AUTH_LOGIN);
-  }, 600);
+  router.navigate(
+    sessionStorage.getItem(SESSION_IS_LOGGED_IN) === IS_LOGGED_IN.YES
+      ? HOME
+      : AUTH_LOGIN
+  );
 }

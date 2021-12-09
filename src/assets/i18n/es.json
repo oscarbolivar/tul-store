@@ -10,6 +10,7 @@
         "REQUIRED_EMAIL": "Ingresa un correo electrónico válido.",
         "INVALID_EMAIL": "Ingresa un correo electrónico válido.",
         "WEAK_PASSWORD": "La contraseña es muy débil.",
+        "EMAIL_ALREADY_IN_USE": "Este correo ya existe para otra cuenta.",
         "REQUIRED_PASSWORD": "Tu contraseña es obligatoria."
       },
       "MESSAGES": {
