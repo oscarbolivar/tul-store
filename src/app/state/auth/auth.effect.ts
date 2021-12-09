@@ -13,7 +13,11 @@ import {
 import { of } from 'rxjs';
 import { Router } from '@angular/router';
 import { AUTH_LOGIN, HOME } from '@core/constants/routes';
-import { SESSION_EMAIL } from '@core/constants/session-storage';
+import {
+  IS_LOGGED_IN,
+  SESSION_EMAIL,
+  SESSION_IS_LOGGED_IN
+} from '@core/constants/session-storage';
 
 @Injectable()
 export class AuthEffect {
@@ -31,9 +35,11 @@ export class AuthEffect {
         this._service.isUserLoggedIn$().pipe(
           filter((user) => user !== undefined),
           map((user) => {
-            return featureAction.isUserLoggedInSuccessAction({
-              isLoggedIn: !!user
-            });
+            sessionStorage.setItem(
+              SESSION_IS_LOGGED_IN,
+              !!user ? IS_LOGGED_IN.YES : IS_LOGGED_IN.NO
+            );
+            return featureAction.isUserLoggedInSuccessAction();
           })
         )
       ),
@@ -48,11 +54,13 @@ export class AuthEffect {
         this._service
           .login(action.email, action.password)
           .then(() => {
-            this._router.navigate(HOME);
+            sessionStorage.setItem(SESSION_IS_LOGGED_IN, IS_LOGGED_IN.YES);
             sessionStorage.setItem(SESSION_EMAIL, action.email);
+            this._router.navigate(HOME);
             return featureAction.loginSuccessAction();
           })
           .catch((error) => {
+            sessionStorage.setItem(SESSION_IS_LOGGED_IN, IS_LOGGED_IN.NO);
             const message = this._translate.instant(
               error.code === FIREBASE_USER_NOT_FOUND ||
                 error.code === FIREBASE_WRONG_PASSWORD
@@ -74,8 +82,9 @@ export class AuthEffect {
         this._service
           .signOut()
           .then(() => {
-            this._router.navigate(AUTH_LOGIN);
+            sessionStorage.setItem(SESSION_IS_LOGGED_IN, IS_LOGGED_IN.NO);
             sessionStorage.removeItem(SESSION_EMAIL);
+            this._router.navigate(AUTH_LOGIN);
             return featureAction.signOutSuccessAction();
           })
           .catch(() =>
@@ -94,8 +103,9 @@ export class AuthEffect {
         this._service
           .register(action.email, action.password)
           .then(() => {
-            this._router.navigate(AUTH_LOGIN);
+            sessionStorage.setItem(SESSION_IS_LOGGED_IN, IS_LOGGED_IN.YES);
             sessionStorage.setItem(SESSION_EMAIL, action.email);
+            this._router.navigate(HOME);
             return featureAction.registerSuccessAction();
           })
           .catch((error) => {

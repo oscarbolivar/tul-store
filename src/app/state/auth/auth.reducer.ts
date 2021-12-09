@@ -8,10 +8,6 @@ export const authReducer = createReducer(
     ...state,
     message: ''
   })),
-  on(action.isUserLoggedInSuccessAction, (state, { isLoggedIn }) => ({
-    ...state,
-    isLoggedIn
-  })),
   on(
     action.loginAction,
     action.signOutAction,
@@ -24,28 +20,24 @@ export const authReducer = createReducer(
   ),
   on(action.loginSuccessAction, (state) => ({
     ...state,
-    isLoggedIn: true,
     working: false,
     completed: true,
     message: ''
   })),
   on(action.loginErrorAction, (state, { message }) => ({
     ...state,
-    isLoggedIn: false,
     working: false,
     completed: false,
     message
   })),
   on(action.signOutSuccessAction, (state) => ({
     ...state,
-    isLoggedIn: false,
     working: false,
     completed: true,
     message: ''
   })),
   on(action.signOutErrorAction, (state, { message }) => ({
     ...state,
-    isLoggedIn: true,
     working: false,
     completed: false,
     message

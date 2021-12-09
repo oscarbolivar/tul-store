@@ -1,9 +1,8 @@
 import { AfterViewInit, Component, OnInit } from '@angular/core';
 import { AuthFacade } from '@modules/auth/facade/auth.facade';
-import { Observable } from 'rxjs';
 import { Router } from '@angular/router';
-import { AUTH_LOGIN, HOME } from '@core/constants/routes';
 import { SESSION_EMAIL } from '@core/constants/session-storage';
+import { userIsLoggedIn } from '@core/helpers/app.helpers';
 
 @Component({
   selector: 'app-layout',
@@ -18,13 +17,7 @@ export class LayoutComponent implements OnInit, AfterViewInit {
   }
 
   ngAfterViewInit(): void {
-    setTimeout(() => {
-      this.isLoggedIn$
-        .subscribe((isLoggedIn) => {
-          this._router.navigate(isLoggedIn ? HOME : AUTH_LOGIN);
-        })
-        .unsubscribe();
-    }, 600);
+    userIsLoggedIn(this._router);
   }
 
   public signOut(): void {
@@ -33,9 +26,5 @@ export class LayoutComponent implements OnInit, AfterViewInit {
 
   get sessionEmail(): string | null {
     return sessionStorage.getItem(SESSION_EMAIL);
-  }
-
-  get isLoggedIn$(): Observable<boolean> {
-    return this._authFacade.isLoggedIn$;
   }
 }

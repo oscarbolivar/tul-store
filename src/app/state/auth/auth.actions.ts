@@ -5,8 +5,7 @@ export const reset = createAction('[Auth] Reset');
 export const isUserLoggedInAction = createAction('[Auth] Is User Logged In');
 
 export const isUserLoggedInSuccessAction = createAction(
-  '[Auth] Is User Logged In - Success',
-  props<{ isLoggedIn: boolean }>()
+  '[Auth] Is User Logged In - Success'
 );
 
 export const isUserLoggedInErrorAction = createAction(

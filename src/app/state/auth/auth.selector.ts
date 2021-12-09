@@ -4,11 +4,6 @@ import { AuthState } from '@state/auth/auth.state';
 
 const loginFeature = (state: AppState) => state.auth;
 
-export const isLoggedIn = createSelector(
-  loginFeature,
-  (state: AuthState) => state.isLoggedIn
-);
-
 export const working = createSelector(
   loginFeature,
   (state: AuthState) => state.working

@@ -9,10 +9,6 @@ import { AppState } from '@state/app.state';
 export class AuthFacade {
   constructor(private _store: Store<AppState>) {}
 
-  public isLoggedIn$: Observable<boolean> = this._store.pipe(
-    select(selector.isLoggedIn)
-  );
-
   public working$: Observable<boolean> = this._store.pipe(
     select(selector.working)
   );

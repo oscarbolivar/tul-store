@@ -2,8 +2,9 @@ import { Component } from '@angular/core';
 import { AuthFacade } from '@modules/auth/facade/auth.facade';
 import { Observable } from 'rxjs';
 import { Router } from '@angular/router';
-import { AUTH_LOGIN, AUTH_REGISTER, HOME } from '@core/constants/routes';
+import { AUTH_REGISTER } from '@core/constants/routes';
 import { User } from '@modules/auth/models/auth.model';
+import { userIsLoggedIn } from '@core/helpers/app.helpers';
 
 @Component({
   selector: 'app-login',
@@ -15,14 +16,7 @@ export class LoginComponent {
 
   public isUserLoggedIn(): void {
     this._facade.isUserLoggedIn();
-
-    setTimeout(() => {
-      this.isLoggedIn$
-        .subscribe((isLoggedIn) => {
-          this._router.navigate(isLoggedIn ? HOME : AUTH_LOGIN);
-        })
-        .unsubscribe();
-    }, 600);
+    userIsLoggedIn(this._router);
   }
 
   public login(user: User): void {
@@ -32,10 +26,6 @@ export class LoginComponent {
   public goToRegister(): void {
     this._facade.reset();
     this._router.navigate(AUTH_REGISTER);
-  }
-
-  get isLoggedIn$(): Observable<boolean> {
-    return this._facade.isLoggedIn$;
   }
 
   get working$(): Observable<boolean> {
