@@ -1,17 +1,37 @@
 <nz-layout>
   <nz-header>
     <div class="logo"></div>
-    <ul nz-menu nzMode="horizontal">
-      <li nz-menu-item nzSelected>
-        <i nz-icon nzType="mail"></i>
-        {{ 'LAYOUT.MENU.PURCHASE' | translate }}
-      </li>
-      <li nz-submenu nzTitle="Perfil" nzIcon="user">
+    <ul
+      nz-menu
+      nzMode="horizontal">
+      <li
+        nz-submenu
+        nzTitle="{{ 'LAYOUT.MENU.HOME' | translate }}"
+        nzIcon="shopping">
         <ul>
-          <li nz-menu-group nzTitle="{{ sessionEmail }}"></li>
+            <li
+              (click)="goToStore()"
+              nz-menu-item>
+              {{ 'LAYOUT.MENU.BUY' | translate }}
+            </li>
+        </ul>
+      </li>
+      <li
+        nz-submenu
+        nzTitle="{{ 'LAYOUT.MENU.PROFILE' | translate }}"
+        nzIcon="user">
+        <ul>
+          <li
+            nz-menu-group
+            nzTitle="{{ userEmail }}">
+          </li>
           <li nz-menu-group>
             <ul>
-              <li nz-menu-item (click)="signOut()">Cerrar sesión</li>
+              <li
+                (click)="signOut()"
+                nz-menu-item>
+                {{ 'LAYOUT.MENU.SIGN_OUT_ACTION' | translate }}
+              </li>
             </ul>
           </li>
         </ul>

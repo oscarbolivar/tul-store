@@ -3,6 +3,7 @@ import { AuthFacade } from '@modules/auth/facade/auth.facade';
 import { Router } from '@angular/router';
 import { SESSION_EMAIL } from '@core/constants/session-storage';
 import { userIsLoggedIn } from '@core/helpers/app.helpers';
+import { PRODUCT_STORE } from '@core/constants/routes';
 
 @Component({
   selector: 'app-layout',
@@ -16,11 +17,15 @@ export class LayoutComponent implements OnInit {
     userIsLoggedIn(this._router);
   }
 
+  public goToStore(): void {
+    this._router.navigate(PRODUCT_STORE);
+  }
+
   public signOut(): void {
     this._authFacade.signOut();
   }
 
-  get sessionEmail(): string | null {
+  get userEmail(): string | null {
     return sessionStorage.getItem(SESSION_EMAIL);
   }
 }

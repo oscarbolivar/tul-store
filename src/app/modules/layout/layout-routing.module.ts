@@ -7,10 +7,11 @@ const routes: Routes = [
     path: '',
     component: LayoutComponent,
     children: [
+      { path: '', redirectTo: 'product', pathMatch: 'full' },
       {
-        path: 'purchase',
+        path: 'product',
         loadChildren: () =>
-          import('../purchase/purchase.module').then((m) => m.PurchaseModule)
+          import('../product/product.module').then((m) => m.ProductModule)
       }
     ]
   }

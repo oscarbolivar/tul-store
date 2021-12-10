@@ -37,8 +37,10 @@
   },
   "LAYOUT": {
     "MENU": {
-      "PURCHASE": "Compra",
-      "PROFILE": "Perfil"
+      "HOME": "Tul Store",
+      "BUY": "Comprar",
+      "PROFILE": "Perfil",
+      "SIGN_OUT_ACTION": "Salir"
     }
   }
 }
