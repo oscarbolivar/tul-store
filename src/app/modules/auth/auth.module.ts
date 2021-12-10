@@ -18,8 +18,8 @@ import { UserFormComponent } from './components/shared/user-form/user-form.compo
 
 @NgModule({
   declarations: [
-    LoginComponent,
     AuthContainer,
+    LoginComponent,
     RegisterComponent,
     UserFormComponent
   ],

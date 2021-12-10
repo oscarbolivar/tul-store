@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { ProductFacade } from '@modules/product/facade/product.facade';
+import { Product } from '@modules/product/models/product.model';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-store',
@@ -6,7 +9,13 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./store.component.sass']
 })
 export class StoreComponent implements OnInit {
-  constructor() {}
+  constructor(private _facade: ProductFacade) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this._facade.fetchProducts();
+  }
+
+  get products$(): Observable<Product[]> {
+    return this._facade.products$;
+  }
 }

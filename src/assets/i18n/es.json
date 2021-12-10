@@ -14,7 +14,7 @@
         "REQUIRED_PASSWORD": "Tu contraseña es obligatoria."
       },
       "MESSAGES": {
-        "UNKNOWN_ERROR": "Ocurrió un error inesperado."
+        "GENERIC_ERROR": "Ocurrió un error inesperado."
       }
     },
     "LOGIN": {
@@ -32,6 +32,13 @@
         "TITLE": "Regístrate en TulStore",
         "REGISTER_ACTION": "Guardar",
         "LOGIN_ACTION": "Iniciar sesión"
+      }
+    }
+  },
+  "PRODUCT": {
+    "FETCH": {
+      "MESSAGES": {
+        "GENERIC_ERROR": "Ocurrió un error inesperado."
       }
     }
   },
