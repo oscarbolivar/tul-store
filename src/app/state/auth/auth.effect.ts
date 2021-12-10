@@ -67,7 +67,7 @@ export class AuthEffect {
                 ? 'AUTH.LOGIN.MESSAGES.NOT_USER_FOUND'
                 : error.code === FIREBASE_INVALID_EMAIL
                 ? 'AUTH.USER_FORM.VALIDATIONS.INVALID_EMAIL'
-                : 'AUTH.USER_FORM.MESSAGES.UNKNOWN_ERROR'
+                : 'AUTH.USER_FORM.MESSAGES.GENERIC_ERROR'
             );
             return featureAction.loginErrorAction({ message });
           })
@@ -89,7 +89,7 @@ export class AuthEffect {
           })
           .catch(() =>
             featureAction.signOutErrorAction({
-              message: 'AUTH.USER_FORM.MESSAGES.UNKNOWN_ERROR'
+              message: 'AUTH.USER_FORM.MESSAGES.GENERIC_ERROR'
             })
           )
       )
@@ -116,7 +116,7 @@ export class AuthEffect {
                 ? 'AUTH.USER_FORM.VALIDATIONS.INVALID_EMAIL'
                 : error.code === FIREBASE_EMAIL_ALREADY_IN_USE
                 ? 'AUTH.USER_FORM.VALIDATIONS.EMAIL_ALREADY_IN_USE'
-                : 'AUTH.USER_FORM.MESSAGES.UNKNOWN_ERROR'
+                : 'AUTH.USER_FORM.MESSAGES.GENERIC_ERROR'
             );
             return featureAction.registerErrorAction({ message });
           })

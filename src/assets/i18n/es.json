@@ -14,7 +14,7 @@
         "REQUIRED_PASSWORD": "Tu contraseña es obligatoria."
       },
       "MESSAGES": {
-        "UNKNOWN_ERROR": "Ocurrió un error inesperado."
+        "GENERIC_ERROR": "Ocurrió un error inesperado."
       }
     },
     "LOGIN": {
@@ -35,10 +35,19 @@
       }
     }
   },
+  "PRODUCT": {
+    "FETCH": {
+      "MESSAGES": {
+        "GENERIC_ERROR": "Ocurrió un error inesperado."
+      }
+    }
+  },
   "LAYOUT": {
     "MENU": {
-      "PURCHASE": "Compra",
-      "PROFILE": "Perfil"
+      "HOME": "Tul Store",
+      "BUY": "Comprar",
+      "PROFILE": "Perfil",
+      "SIGN_OUT_ACTION": "Salir"
     }
   }
 }

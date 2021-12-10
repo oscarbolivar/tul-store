@@ -4,9 +4,8 @@ import * as action from './auth.actions';
 
 export const authReducer = createReducer(
   INITIAL_AUTH_STATE,
-  on(action.reset, (state) => ({
-    ...state,
-    message: ''
+  on(action.resetAction, () => ({
+    ...INITIAL_AUTH_STATE
   })),
   on(
     action.loginAction,

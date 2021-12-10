@@ -22,7 +22,7 @@ export class AuthFacade {
   );
 
   public reset(): void {
-    this._store.dispatch(action.reset());
+    this._store.dispatch(action.resetAction());
   }
 
   public isUserLoggedIn(): void {

@@ -1,0 +1,47 @@
+<nz-layout>
+  <nz-header>
+    <div class="logo"></div>
+    <ul
+      nz-menu
+      nzMode="horizontal">
+      <li
+        nz-submenu
+        nzTitle="{{ 'LAYOUT.MENU.HOME' | translate }}"
+        nzIcon="shopping">
+        <ul>
+            <li
+              (click)="goToStore()"
+              nz-menu-item>
+              {{ 'LAYOUT.MENU.BUY' | translate }}
+            </li>
+        </ul>
+      </li>
+      <li
+        nz-submenu
+        nzTitle="{{ 'LAYOUT.MENU.PROFILE' | translate }}"
+        nzIcon="user">
+        <ul>
+          <li
+            nz-menu-group
+            nzTitle="{{ userEmail }}">
+          </li>
+          <li nz-menu-group>
+            <ul>
+              <li
+                (click)="signOut()"
+                nz-menu-item>
+                {{ 'LAYOUT.MENU.SIGN_OUT_ACTION' | translate }}
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+    </ul>
+  </nz-header>
+
+  <nz-content>
+    <div class="inner-content">
+      <router-outlet></router-outlet>
+    </div>
+  </nz-content>
+</nz-layout>

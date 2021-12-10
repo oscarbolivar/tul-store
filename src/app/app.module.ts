@@ -22,6 +22,8 @@ import { AngularFireAuthModule } from '@angular/fire/auth';
 import { APP_EFFECTS } from '@state/app.effect';
 import { AuthService } from '@modules/auth/services/auth.service';
 import { AuthFacade } from '@modules/auth/facade/auth.facade';
+import { ProductService } from '@modules/product/services/product.service';
+import { ProductFacade } from '@modules/product/facade/product.facade';
 
 registerLocaleData(es_CO);
 
@@ -51,6 +53,8 @@ export function initializeApp(authFacade: AuthFacade): () => void {
   providers: [
     AuthService,
     AuthFacade,
+    ProductService,
+    ProductFacade,
     { provide: NZ_I18N, useValue: es_ES },
     {
       provide: INITIAL_STATE,
