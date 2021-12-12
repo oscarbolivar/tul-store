@@ -6,6 +6,7 @@ import { NzMenuModule } from 'ng-zorro-antd/menu';
 import { TranslateModule } from '@ngx-translate/core';
 import { AuthFacade } from '@modules/auth/facade/auth.facade';
 import { LayoutContainer } from '@modules/layout/container/layout/layout.container';
+import { NzIconModule } from 'ng-zorro-antd/icon';
 
 @NgModule({
   declarations: [LayoutContainer],
@@ -14,7 +15,8 @@ import { LayoutContainer } from '@modules/layout/container/layout/layout.contain
     LayoutRoutingModule,
     NzLayoutModule,
     NzMenuModule,
-    TranslateModule
+    TranslateModule,
+    NzIconModule
   ],
   providers: [AuthFacade]
 })

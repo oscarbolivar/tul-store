@@ -36,7 +36,21 @@
     }
   },
   "PRODUCT": {
-    "FETCH": {
+    "STORE": {
+      "LAYOUT": {
+        "ADD_TO_CART": "Añadir al carrito"
+      },
+      "MESSAGES": {
+        "GENERIC_ERROR": "Ocurrió un error inesperado."
+      }
+    },
+    "CART": {
+      "LAYOUT": {
+        "ORDER_TITLE": "Así va tu pedido",
+        "PRODUCTS_TITLE": "Tus productos seleccionados",
+        "DELETE_ACTION": "Eliminar",
+        "ORDER_ACTION": "Proceder a la compra"
+      },
       "MESSAGES": {
         "GENERIC_ERROR": "Ocurrió un error inesperado."
       }
@@ -46,6 +60,7 @@
     "MENU": {
       "HOME": "Tul Store",
       "BUY": "Comprar",
+      "CART": "Carrito",
       "PROFILE": "Perfil",
       "SIGN_OUT_ACTION": "Salir"
     }

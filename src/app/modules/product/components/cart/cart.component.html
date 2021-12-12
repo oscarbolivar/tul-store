@@ -1,0 +1,36 @@
+<h3>{{ 'PRODUCT.CART.LAYOUT.ORDER_TITLE' | translate }}</h3>
+
+<ul
+  nz-list
+  [nzDataSource]="[]"
+  nzBordered
+  nzSize="large">
+
+  <nz-list-header>{{ 'PRODUCT.CART.LAYOUT.PRODUCTS_TITLE' | translate }}</nz-list-header>
+
+  <li
+    *ngFor="let purchase of purchase$ | async; index as index"
+    nz-list-item
+    nzNoFlex>
+
+    <ul nz-list-item-actions>
+      <nz-list-item-action>
+        <a (click)="deleteFromCart(purchase.product.id, index)">
+          {{ 'PRODUCT.CART.LAYOUT.DELETE_ACTION' | translate }}
+        </a>
+      </nz-list-item-action>
+    </ul>
+
+    {{ purchase.product.name }} | {{ purchase.quantity }} unidades
+  </li>
+
+  <nz-list-footer>
+    <button
+      nz-button
+      nzType="primary"
+      (click)="order()">
+      {{ 'PRODUCT.CART.LAYOUT.ORDER_ACTION' | translate }}
+    </button>
+  </nz-list-footer>
+
+</ul>

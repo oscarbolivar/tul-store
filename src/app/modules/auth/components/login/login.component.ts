@@ -4,7 +4,7 @@ import { Observable } from 'rxjs';
 import { Router } from '@angular/router';
 import { AUTH_REGISTER } from '@core/constants/routes';
 import { User } from '@modules/auth/models/auth.model';
-import { userIsLoggedIn } from '@core/helpers/app.helpers';
+import { userIsLoggedIn } from '@modules/auth/helpers/auth.helper';
 
 @Component({
   selector: 'app-login',

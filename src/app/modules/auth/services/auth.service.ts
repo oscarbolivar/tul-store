@@ -8,11 +8,11 @@ import UserCredential = firebase.auth.UserCredential;
 export class AuthService {
   public currentUser!: firebase.User | null;
 
-  constructor(private _auth: AngularFireAuth) {}
+  constructor(private _fireAuth: AngularFireAuth) {}
 
   public isUserLoggedIn$(): Observable<firebase.User | null> {
     const status = new BehaviorSubject(this.currentUser);
-    this._auth
+    this._fireAuth
       .onAuthStateChanged((user) => {
         status.next(!!user ? user : null);
       })
@@ -21,14 +21,14 @@ export class AuthService {
   }
 
   public login(email: string, password: string): Promise<UserCredential> {
-    return this._auth.signInWithEmailAndPassword(email, password);
+    return this._fireAuth.signInWithEmailAndPassword(email, password);
   }
 
   public signOut(): Promise<void> {
-    return this._auth.signOut();
+    return this._fireAuth.signOut();
   }
 
   public register(email: string, password: string): Promise<UserCredential> {
-    return this._auth.createUserWithEmailAndPassword(email, password);
+    return this._fireAuth.createUserWithEmailAndPassword(email, password);
   }
 }

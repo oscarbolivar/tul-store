@@ -19,6 +19,7 @@ import {
   SESSION_EMAIL,
   SESSION_IS_LOGGED_IN
 } from '@core/constants/session-storage';
+import firebase from 'firebase';
 
 @Injectable()
 export class AuthEffect {
@@ -60,7 +61,7 @@ export class AuthEffect {
             this._router.navigate(HOME);
             return featureAction.loginSuccessAction();
           })
-          .catch((error) => {
+          .catch((error: firebase.FirebaseError) => {
             const message = this._translate.instant(
               error.code === FIREBASE_USER_NOT_FOUND ||
                 error.code === FIREBASE_WRONG_PASSWORD
@@ -108,7 +109,7 @@ export class AuthEffect {
             this._router.navigate(HOME);
             return featureAction.registerSuccessAction();
           })
-          .catch((error) => {
+          .catch((error: firebase.FirebaseError) => {
             const message = this._translate.instant(
               error.code === FIREBASE_WEAK_PASSWORD
                 ? 'AUTH.USER_FORM.VALIDATIONS.WEAK_PASSWORD'

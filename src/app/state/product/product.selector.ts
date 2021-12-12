@@ -9,17 +9,12 @@ export const products = createSelector(
   (state: ProductState) => state.products
 );
 
-export const working = createSelector(
+export const cart = createSelector(
   productModule,
-  (state: ProductState) => state.working
+  (state: ProductState) => state.cart
 );
 
-export const completed = createSelector(
+export const purchase = createSelector(
   productModule,
-  (state: ProductState) => state.completed
-);
-
-export const message = createSelector(
-  productModule,
-  (state: ProductState) => state.message
+  (state: ProductState) => state.purchase
 );
