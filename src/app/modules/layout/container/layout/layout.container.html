@@ -1,21 +1,40 @@
 <nz-layout>
+
   <nz-header>
-    <div class="logo"></div>
+
     <ul
       nz-menu
       nzMode="horizontal">
+
+      <li
+        (click)="goToStore()"
+        nz-menu-item>
+        <i nz-icon nzType="shopping"></i>
+        {{ 'LAYOUT.MENU.HOME' | translate }}
+      </li>
+
       <li
         nz-submenu
-        nzTitle="{{ 'LAYOUT.MENU.HOME' | translate }}"
-        nzIcon="shopping">
+        nzTitle="{{ 'LAYOUT.MENU.CART' | translate }}"
+        nzIcon="shopping-cart">
         <ul>
-            <li
-              (click)="goToStore()"
-              nz-menu-item>
-              {{ 'LAYOUT.MENU.BUY' | translate }}
-            </li>
+          <li
+            *ngFor="let purchase of purchase$ | async; index as index"
+            nz-menu-group
+            nzTitle="{{ purchase.product.name }} ({{ purchase.quantity }})">
+          </li>
+          <li nz-menu-group>
+            <ul>
+              <li
+                (click)="goToCart()"
+                nz-menu-item>
+                {{ 'LAYOUT.MENU.CART' | translate }}
+              </li>
+            </ul>
+          </li>
         </ul>
       </li>
+
       <li
         nz-submenu
         nzTitle="{{ 'LAYOUT.MENU.PROFILE' | translate }}"
@@ -36,12 +55,15 @@
           </li>
         </ul>
       </li>
+
     </ul>
+
   </nz-header>
 
   <nz-content>
-    <div class="inner-content">
+    <div class="layout-content">
       <router-outlet></router-outlet>
     </div>
   </nz-content>
+
 </nz-layout>
