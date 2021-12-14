@@ -2,6 +2,7 @@ import { createAction, props } from '@ngrx/store';
 import {
   Cart,
   Product,
+  Purchase,
   TransactionType
 } from '@modules/product/models/product.model';
 
@@ -23,6 +24,18 @@ export const getPendingCartSuccessAction = createAction(
 );
 export const getPendingCartErrorAction = createAction(
   '[Product] Get a Pending Cart - Error'
+);
+
+export const fetchPurchaseAction = createAction(
+  '[Product] Fetch Purchase',
+  props<{ cart: Cart }>()
+);
+export const fetchPurchaseSuccessAction = createAction(
+  '[Product] Fetch Purchase - Success',
+  props<{ purchase: Purchase[] }>()
+);
+export const fetchPurchaseErrorAction = createAction(
+  '[Product] Fetch Purchase - Error'
 );
 
 export const createCartAction = createAction('[Product] Create a Cart');

@@ -21,14 +21,14 @@
           <li
             *ngFor="let purchase of purchase$ | async; index as index"
             nz-menu-group
-            nzTitle="{{ purchase.product.name }} ({{ purchase.quantity }})">
+            nzTitle="{{ purchase.name }} ({{ purchase.quantity }})">
           </li>
           <li nz-menu-group>
             <ul>
               <li
                 (click)="goToCart()"
                 nz-menu-item>
-                {{ 'LAYOUT.MENU.CART' | translate }}
+                {{ 'LAYOUT.MENU.CART_ACTION' | translate }}
               </li>
             </ul>
           </li>

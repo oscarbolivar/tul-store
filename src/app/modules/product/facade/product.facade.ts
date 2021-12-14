@@ -22,7 +22,7 @@ export class ProductFacade {
   public cart$: Observable<Cart> = this._store.pipe(select(selector.cart));
 
   public purchase$: Observable<Purchase[]> = this._store.pipe(
-    select(selector.purchase)
+    select(selector.purchaseMapped)
   );
 
   public fetchProducts(): void {
@@ -31,10 +31,6 @@ export class ProductFacade {
 
   public getPendingCart(): void {
     this._store.dispatch(action.getPendingCartAction());
-  }
-
-  public createCart(): void {
-    this._store.dispatch(action.createCartAction());
   }
 
   public addToCart(

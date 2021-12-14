@@ -61,6 +61,7 @@
       "HOME": "Tul Store",
       "BUY": "Comprar",
       "CART": "Carrito",
+      "CART_ACTION": "Ir al carrito",
       "PROFILE": "Perfil",
       "SIGN_OUT_ACTION": "Salir"
     }

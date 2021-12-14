@@ -10,7 +10,7 @@ export function getProductFoundedInCart(
   purchase: Purchase[]
 ): ProductFounded {
   const indexProduct = purchase.findIndex(
-    (item) => item.product.id === product.id
+    (item) => item.product_id === product.id
   );
   const transactionType =
     indexProduct === -1 ? TransactionType.ADD : TransactionType.UPDATE;

@@ -1,7 +1,14 @@
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import * as featureAction from '@state/product/product.actions';
-import { catchError, map, mergeMap, switchMap, take } from 'rxjs/operators';
+import {
+  catchError,
+  map,
+  mergeMap,
+  switchMap,
+  take,
+  withLatestFrom
+} from 'rxjs/operators';
 import { TranslateService } from '@ngx-translate/core';
 import { of } from 'rxjs';
 import { ProductService } from '@modules/product/services/product.service';
@@ -36,7 +43,7 @@ export class ProductEffect {
     this._actions$.pipe(
       ofType(featureAction.getPendingCartAction),
       switchMap(() =>
-        this._service.existsAPendingCart$().pipe(
+        this._service.fetchPendingCart$().pipe(
           take(1),
           mergeMap((pendingCart) => {
             const action = [];
@@ -46,6 +53,9 @@ export class ProductEffect {
               action.push(
                 featureAction.getPendingCartSuccessAction({
                   cart: pendingCart[0]
+                }),
+                featureAction.fetchPurchaseAction({
+                  cart: pendingCart[0]
                 })
               );
             }
@@ -54,6 +64,22 @@ export class ProductEffect {
         )
       ),
       catchError(() => of(featureAction.getPendingCartErrorAction()))
+    )
+  );
+
+  public fetchPurchase$ = createEffect(() =>
+    this._actions$.pipe(
+      ofType(featureAction.fetchPurchaseAction),
+      switchMap((action) =>
+        this._service.fetchPurchase$(action.cart).pipe(
+          map((purchase) =>
+            featureAction.fetchPurchaseSuccessAction({
+              purchase: purchase.docs.map((doc) => doc.data())
+            })
+          )
+        )
+      ),
+      catchError(() => of(featureAction.fetchPurchaseErrorAction()))
     )
   );
 
@@ -69,6 +95,38 @@ export class ProductEffect {
           .catch(() => {
             return featureAction.createCartErrorAction();
           });
+      })
+    )
+  );
+
+  public addToCartCart$ = createEffect(() =>
+    this._actions$.pipe(
+      ofType(featureAction.addToCartAction),
+      withLatestFrom(this._facade.cart$, this._facade.purchase$),
+      switchMap(([action, cart, purchase]) => {
+        if (action.indexProduct === -1) {
+          return this._service
+            .addToCart(cart, action.product, 1)
+            .then(() => {
+              return featureAction.addToCartSuccessAction();
+            })
+            .catch(() => {
+              return featureAction.addToCartErrorAction();
+            });
+        } else {
+          return this._service
+            .updateProductInCart(
+              cart,
+              action.product,
+              purchase[action.indexProduct]?.quantity
+            )
+            .then(() => {
+              return featureAction.addToCartSuccessAction();
+            })
+            .catch(() => {
+              return featureAction.addToCartErrorAction();
+            });
+        }
       })
     )
   );

@@ -15,13 +15,13 @@
 
     <ul nz-list-item-actions>
       <nz-list-item-action>
-        <a (click)="deleteFromCart(purchase.product.id, index)">
+        <a (click)="deleteFromCart(purchase.product_id, index)">
           {{ 'PRODUCT.CART.LAYOUT.DELETE_ACTION' | translate }}
         </a>
       </nz-list-item-action>
     </ul>
 
-    {{ purchase.product.name }} | {{ purchase.quantity }} unidades
+    {{ purchase.name }} | {{ purchase.quantity }} unidades
   </li>
 
   <nz-list-footer>
