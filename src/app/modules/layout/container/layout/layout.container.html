@@ -60,7 +60,9 @@
 
   <nz-content>
     <div *ngIf="(workingLayout$ | async) && !(completedLayout$ | async)">
-      Cargando...
+      <nz-spin
+        nzSimple
+        [nzSize]="'large'"></nz-spin>
     </div>
 
     <div class="layout-content">
