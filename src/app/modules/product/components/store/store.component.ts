@@ -25,7 +25,7 @@ export class StoreComponent implements OnInit, OnDestroy {
     this._destroy$.complete();
   }
 
-  public addToCart(product: Product): void {
+  public updateCart(product: Product): void {
     this.purchase$
       .pipe(take(1), takeUntil(this._destroy$))
       .subscribe((purchase) => {
@@ -34,7 +34,7 @@ export class StoreComponent implements OnInit, OnDestroy {
           purchase
         );
 
-        this._facade.addToCart(transactionType, product, indexProduct);
+        this._facade.updateCart(transactionType, product, indexProduct);
       });
   }
 

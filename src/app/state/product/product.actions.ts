@@ -46,19 +46,19 @@ export const createCartErrorAction = createAction(
   '[Product] Create a Cart - Error'
 );
 
-export const addToCartAction = createAction(
-  '[Product] Add to Cart',
+export const updateCartAction = createAction(
+  '[Product] Update Cart',
   props<{
     transactionType: TransactionType;
     product: Product;
     indexProduct: number;
   }>()
 );
-export const addToCartSuccessAction = createAction(
-  '[Product] Add to Cart - Success'
+export const updateCartSuccessAction = createAction(
+  '[Product] Update Cart - Success'
 );
-export const addToCartErrorAction = createAction(
-  '[Product] Add to Cart - Error'
+export const updateCartErrorAction = createAction(
+  '[Product] Update Cart - Error'
 );
 
 export const deleteFromCartAction = createAction(

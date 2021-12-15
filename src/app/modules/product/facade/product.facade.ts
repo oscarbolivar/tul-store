@@ -33,13 +33,13 @@ export class ProductFacade {
     this._store.dispatch(action.getPendingCartAction());
   }
 
-  public addToCart(
+  public updateCart(
     transactionType: TransactionType,
     product: Product,
     indexProduct: number
   ): void {
     this._store.dispatch(
-      action.addToCartAction({ transactionType, product, indexProduct })
+      action.updateCartAction({ transactionType, product, indexProduct })
     );
   }
 

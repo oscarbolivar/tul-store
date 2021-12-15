@@ -14,7 +14,7 @@ export const productReducer = createReducer(
     cart
   })),
   on(
-    action.addToCartAction,
+    action.updateCartAction,
     (state, { transactionType, product, indexProduct }) => {
       if (transactionType === TransactionType.ADD) {
         return {

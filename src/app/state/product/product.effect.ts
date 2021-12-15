@@ -13,6 +13,7 @@ import { TranslateService } from '@ngx-translate/core';
 import { of } from 'rxjs';
 import { ProductService } from '@modules/product/services/product.service';
 import { ProductFacade } from '@modules/product/facade/product.facade';
+import { TransactionType } from '@modules/product/models/product.model';
 
 @Injectable()
 export class ProductEffect {
@@ -99,19 +100,19 @@ export class ProductEffect {
     )
   );
 
-  public addToCartCart$ = createEffect(() =>
+  public updateCartCart$ = createEffect(() =>
     this._actions$.pipe(
-      ofType(featureAction.addToCartAction),
+      ofType(featureAction.updateCartAction),
       withLatestFrom(this._facade.cart$, this._facade.purchase$),
       switchMap(([action, cart, purchase]) => {
-        if (action.indexProduct === -1) {
+        if (action.transactionType === TransactionType.ADD) {
           return this._service
             .addToCart(cart, action.product, 1)
             .then(() => {
-              return featureAction.addToCartSuccessAction();
+              return featureAction.updateCartSuccessAction();
             })
             .catch(() => {
-              return featureAction.addToCartErrorAction();
+              return featureAction.updateCartErrorAction();
             });
         } else {
           return this._service
@@ -121,10 +122,10 @@ export class ProductEffect {
               purchase[action.indexProduct]?.quantity
             )
             .then(() => {
-              return featureAction.addToCartSuccessAction();
+              return featureAction.updateCartSuccessAction();
             })
             .catch(() => {
-              return featureAction.addToCartErrorAction();
+              return featureAction.updateCartErrorAction();
             });
         }
       })
