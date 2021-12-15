@@ -23,8 +23,7 @@ export interface Purchase {
 
 export enum TransactionType {
   ADD = 'add',
-  UPDATE = 'update',
-  DELETE = 'delete'
+  UPDATE = 'update'
 }
 
 export interface ProductFounded {

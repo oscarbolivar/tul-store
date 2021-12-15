@@ -38,8 +38,8 @@ export class ProductService {
       .get();
   }
 
-  public createCart(): Promise<DocumentReference<unknown>> {
-    return this._firestore.collection('carts').add({
+  public createCart(): Promise<DocumentReference<Cart>> {
+    return this._firestore.collection<Cart>('carts').add({
       id: getUniqueId().toString(),
       status: CART_STATUS.PENDING
     });
@@ -66,11 +66,7 @@ export class ProductService {
     quantity: number
   ): Promise<void> {
     return this._firestore
-      .collection('product_carts', (collection) =>
-        collection
-          .where('cart_id', '==', cart.id)
-          .where('product_id', '==', productId)
-      )
+      .collection('product_carts')
       .doc(`${cart.id}_${productId}`)
       .update({ quantity });
   }
@@ -109,7 +105,7 @@ export class ProductService {
           }
 
           this._firestore
-            .collection('carts')
+            .collection<Cart>('carts')
             .doc(snapshot[0].id)
             .update({ status: CART_STATUS.COMPLETED })
             .then(() => {
