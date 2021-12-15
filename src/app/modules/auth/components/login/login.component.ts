@@ -4,7 +4,6 @@ import { Observable } from 'rxjs';
 import { Router } from '@angular/router';
 import { AUTH_REGISTER } from '@core/constants/routes';
 import { User } from '@modules/auth/models/auth.model';
-import { userIsLoggedIn } from '@modules/auth/helpers/auth.helper';
 
 @Component({
   selector: 'app-login',
@@ -13,10 +12,6 @@ import { userIsLoggedIn } from '@modules/auth/helpers/auth.helper';
 })
 export class LoginComponent {
   constructor(private _facade: AuthFacade, private _router: Router) {}
-
-  public isUserLoggedIn(): void {
-    userIsLoggedIn(this._router);
-  }
 
   public login(user: User): void {
     this._facade.login(user.email, user.password);

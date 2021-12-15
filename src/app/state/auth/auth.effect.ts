@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { AuthService } from '@modules/auth/services/auth.service';
 import * as featureAction from '@state/auth/auth.actions';
-import { catchError, filter, map, switchMap } from 'rxjs/operators';
+import { switchMap } from 'rxjs/operators';
 import { TranslateService } from '@ngx-translate/core';
 import {
   FIREBASE_EMAIL_ALREADY_IN_USE,
@@ -11,16 +11,10 @@ import {
   FIREBASE_WEAK_PASSWORD,
   FIREBASE_WRONG_PASSWORD
 } from '@core/constants/firebase';
-import { of } from 'rxjs';
 import { Router } from '@angular/router';
 import { AUTH_LOGIN, HOME } from '@core/constants/routes';
-import {
-  IS_LOGGED_IN,
-  SESSION_EMAIL,
-  SESSION_IS_LOGGED_IN
-} from '@core/constants/session-storage';
+import { SESSION_EMAIL } from '@core/constants/session-storage';
 import firebase from 'firebase';
-import { HttpErrorResponse } from '@angular/common/http';
 
 @Injectable()
 export class AuthEffect {
@@ -31,27 +25,6 @@ export class AuthEffect {
     private _router: Router
   ) {}
 
-  public isUserLoggedIn$ = createEffect(() =>
-    this._actions$.pipe(
-      ofType(featureAction.isUserLoggedInAction),
-      switchMap(() =>
-        this._service.isUserLoggedIn$().pipe(
-          filter((user) => user !== undefined),
-          map((user) => {
-            sessionStorage.setItem(
-              SESSION_IS_LOGGED_IN,
-              !!user ? IS_LOGGED_IN.YES : IS_LOGGED_IN.NO
-            );
-            return featureAction.isUserLoggedInSuccessAction();
-          })
-        )
-      ),
-      catchError((error: HttpErrorResponse) =>
-        of(featureAction.isUserLoggedInErrorAction({ message: error.message }))
-      )
-    )
-  );
-
   public login$ = createEffect(() =>
     this._actions$.pipe(
       ofType(featureAction.loginAction),
@@ -59,7 +32,6 @@ export class AuthEffect {
         this._service
           .login(action.email, action.password)
           .then(() => {
-            sessionStorage.setItem(SESSION_IS_LOGGED_IN, IS_LOGGED_IN.YES);
             sessionStorage.setItem(SESSION_EMAIL, action.email);
             this._router.navigate(HOME);
             return featureAction.loginSuccessAction();
@@ -86,7 +58,6 @@ export class AuthEffect {
         this._service
           .signOut()
           .then(() => {
-            sessionStorage.setItem(SESSION_IS_LOGGED_IN, IS_LOGGED_IN.NO);
             sessionStorage.removeItem(SESSION_EMAIL);
             this._router.navigate(AUTH_LOGIN);
             return featureAction.signOutSuccessAction();
@@ -107,7 +78,6 @@ export class AuthEffect {
         this._service
           .register(action.email, action.password)
           .then(() => {
-            sessionStorage.setItem(SESSION_IS_LOGGED_IN, IS_LOGGED_IN.YES);
             sessionStorage.setItem(SESSION_EMAIL, action.email);
             this._router.navigate(HOME);
             return featureAction.registerSuccessAction();
