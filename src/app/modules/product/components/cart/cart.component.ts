@@ -11,7 +11,7 @@ import { ProductFacade } from '@modules/product/facade/product.facade';
 export class CartComponent {
   constructor(private _facade: ProductFacade) {}
 
-  public deleteFromCart(productId: string, index: number): void {
+  public deleteFromCart(productId: string): void {
     this._facade.deleteFromCart(productId);
   }
 

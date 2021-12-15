@@ -46,31 +46,38 @@ export class ProductService {
 
   public addToCart(
     cart: Cart,
-    product: Product,
+    productId: string,
     quantity: number
   ): Promise<void> {
     return this._firestore
       .collection('product_carts')
-      .doc(`${cart.id}_${product.id}`)
+      .doc(`${cart.id}_${productId}`)
       .set({
         cart_id: cart.id,
-        product_id: product.id,
+        product_id: productId,
         quantity
       });
   }
 
   public updateProductInCart(
     cart: Cart,
-    product: Product,
+    productId: string,
     quantity: number
   ): Promise<void> {
     return this._firestore
       .collection('product_carts', (collection) =>
         collection
           .where('cart_id', '==', cart.id)
-          .where('product_id', '==', product.id)
+          .where('product_id', '==', productId)
       )
-      .doc(`${cart.id}_${product.id}`)
+      .doc(`${cart.id}_${productId}`)
       .update({ quantity });
+  }
+
+  public deleteFromCart(cart: Cart, productId: string): Promise<void> {
+    return this._firestore
+      .collection('product_carts')
+      .doc(`${cart.id}_${productId}`)
+      .delete();
   }
 }

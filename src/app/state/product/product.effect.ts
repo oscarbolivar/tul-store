@@ -107,9 +107,13 @@ export class ProductEffect {
       switchMap(([action, cart, purchase]) => {
         if (action.transactionType === TransactionType.ADD) {
           return this._service
-            .addToCart(cart, action.product, 1)
+            .addToCart(cart, action.productId, 1)
             .then(() => {
-              return featureAction.updateCartSuccessAction();
+              return featureAction.updateCartSuccessAction({
+                transactionType: action.transactionType,
+                productId: action.productId,
+                indexProduct: action.indexProduct
+              });
             })
             .catch(() => {
               return featureAction.updateCartErrorAction();
@@ -118,16 +122,39 @@ export class ProductEffect {
           return this._service
             .updateProductInCart(
               cart,
-              action.product,
+              action.productId,
               purchase[action.indexProduct]?.quantity
             )
             .then(() => {
-              return featureAction.updateCartSuccessAction();
+              return featureAction.updateCartSuccessAction({
+                transactionType: action.transactionType,
+                productId: action.productId,
+                indexProduct: action.indexProduct
+              });
             })
             .catch(() => {
               return featureAction.updateCartErrorAction();
             });
         }
+      })
+    )
+  );
+
+  public deleteFromCartCart$ = createEffect(() =>
+    this._actions$.pipe(
+      ofType(featureAction.deleteFromCartAction),
+      withLatestFrom(this._facade.cart$),
+      switchMap(([action, cart]) => {
+        return this._service
+          .deleteFromCart(cart, action.productId)
+          .then(() => {
+            return featureAction.deleteFromCartSuccessAction({
+              productId: action.productId
+            });
+          })
+          .catch(() => {
+            return featureAction.deleteFromCartErrorAction();
+          });
       })
     )
   );

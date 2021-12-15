@@ -25,16 +25,16 @@ export class StoreComponent implements OnInit, OnDestroy {
     this._destroy$.complete();
   }
 
-  public updateCart(product: Product): void {
+  public updateCart(productId: string): void {
     this.purchase$
       .pipe(take(1), takeUntil(this._destroy$))
       .subscribe((purchase) => {
         const { transactionType, indexProduct } = getProductFoundedInCart(
-          product,
+          productId,
           purchase
         );
 
-        this._facade.updateCart(transactionType, product, indexProduct);
+        this._facade.updateCart(transactionType, productId, indexProduct);
       });
   }
 

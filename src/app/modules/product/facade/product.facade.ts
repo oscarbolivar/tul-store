@@ -35,11 +35,11 @@ export class ProductFacade {
 
   public updateCart(
     transactionType: TransactionType,
-    product: Product,
+    productId: string,
     indexProduct: number
   ): void {
     this._store.dispatch(
-      action.updateCartAction({ transactionType, product, indexProduct })
+      action.updateCartAction({ transactionType, productId, indexProduct })
     );
   }
 

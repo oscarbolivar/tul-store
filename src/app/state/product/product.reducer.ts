@@ -13,13 +13,21 @@ export const productReducer = createReducer(
     ...state,
     cart
   })),
+  on(action.fetchPurchaseSuccessAction, (state, { purchase }) => {
+    return {
+      ...state,
+      purchase: purchase.map((item) => {
+        return { product_id: item.product_id, quantity: item.quantity };
+      })
+    };
+  }),
   on(
-    action.updateCartAction,
-    (state, { transactionType, product, indexProduct }) => {
+    action.updateCartSuccessAction,
+    (state, { transactionType, productId, indexProduct }) => {
       if (transactionType === TransactionType.ADD) {
         return {
           ...state,
-          purchase: [...state.purchase, { product_id: product.id, quantity: 1 }]
+          purchase: [...state.purchase, { product_id: productId, quantity: 1 }]
         };
       } else if (transactionType === TransactionType.UPDATE) {
         let newPurchase = !!state.purchase ? state.purchase : [];
@@ -27,7 +35,7 @@ export const productReducer = createReducer(
         newPurchase = newPurchase.map((purchase, index) => {
           const quantity = purchase.quantity + 1;
           if (index === indexProduct) {
-            purchase = { product_id: product.id, quantity };
+            purchase = { product_id: productId, quantity };
           }
           return purchase;
         });
@@ -43,12 +51,12 @@ export const productReducer = createReducer(
       }
     }
   ),
-  on(action.fetchPurchaseSuccessAction, (state, { purchase }) => {
+  on(action.deleteFromCartSuccessAction, (state, { productId }) => {
     return {
       ...state,
-      purchase: purchase.map((item) => {
-        return { product_id: item.product_id, quantity: item.quantity };
-      })
+      purchase: state.purchase.filter(
+        (purchase) => purchase.product_id !== productId
+      )
     };
   })
 );

@@ -50,12 +50,17 @@ export const updateCartAction = createAction(
   '[Product] Update Cart',
   props<{
     transactionType: TransactionType;
-    product: Product;
+    productId: string;
     indexProduct: number;
   }>()
 );
 export const updateCartSuccessAction = createAction(
-  '[Product] Update Cart - Success'
+  '[Product] Update Cart - Success',
+  props<{
+    transactionType: TransactionType;
+    productId: string;
+    indexProduct: number;
+  }>()
 );
 export const updateCartErrorAction = createAction(
   '[Product] Update Cart - Error'
@@ -64,4 +69,11 @@ export const updateCartErrorAction = createAction(
 export const deleteFromCartAction = createAction(
   '[Product] Delete from Cart',
   props<{ productId: string }>()
+);
+export const deleteFromCartSuccessAction = createAction(
+  '[Product] Delete from Cart - Success',
+  props<{ productId: string }>()
+);
+export const deleteFromCartErrorAction = createAction(
+  '[Product] Delete from Cart - Error'
 );
