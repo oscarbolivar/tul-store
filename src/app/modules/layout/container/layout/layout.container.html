@@ -1,7 +1,6 @@
 <nz-layout>
 
   <nz-header>
-
     <ul
       nz-menu
       nzMode="horizontal">
@@ -57,10 +56,13 @@
       </li>
 
     </ul>
-
   </nz-header>
 
   <nz-content>
+    <div *ngIf="(workingLayout$ | async) && !(completedLayout$ | async)">
+      Cargando...
+    </div>
+
     <div class="layout-content">
       <router-outlet></router-outlet>
     </div>

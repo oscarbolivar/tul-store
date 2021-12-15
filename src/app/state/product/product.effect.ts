@@ -14,6 +14,9 @@ import { of } from 'rxjs';
 import { ProductService } from '@modules/product/services/product.service';
 import { ProductFacade } from '@modules/product/facade/product.facade';
 import { TransactionType } from '@modules/product/models/product.model';
+import firebase from 'firebase';
+import { HttpErrorResponse } from '@angular/common/http';
+import { getProductIndexInCart } from '@modules/product/helpers/product.helper';
 
 @Injectable()
 export class ProductEffect {
@@ -36,7 +39,9 @@ export class ProductEffect {
             )
           )
       ),
-      catchError(() => of(featureAction.fetchProductsErrorAction()))
+      catchError((error: HttpErrorResponse) =>
+        of(featureAction.fetchProductsErrorAction({ message: error.message }))
+      )
     )
   );
 
@@ -64,7 +69,9 @@ export class ProductEffect {
           })
         )
       ),
-      catchError(() => of(featureAction.getPendingCartErrorAction()))
+      catchError((error: HttpErrorResponse) =>
+        of(featureAction.getPendingCartErrorAction({ message: error.message }))
+      )
     )
   );
 
@@ -80,23 +87,23 @@ export class ProductEffect {
           )
         )
       ),
-      catchError(() => of(featureAction.fetchPurchaseErrorAction()))
+      catchError((error: HttpErrorResponse) =>
+        of(featureAction.fetchPurchaseErrorAction({ message: error.message }))
+      )
     )
   );
 
   public createCart$ = createEffect(() =>
     this._actions$.pipe(
       ofType(featureAction.createCartAction),
-      switchMap(() => {
-        return this._service
+      switchMap(() =>
+        this._service
           .createCart()
-          .then(() => {
-            return featureAction.getPendingCartAction();
-          })
-          .catch(() => {
-            return featureAction.createCartErrorAction();
-          });
-      })
+          .then(() => featureAction.getPendingCartAction())
+          .catch((error: firebase.FirebaseError) =>
+            featureAction.createCartErrorAction({ message: error.message })
+          )
+      )
     )
   );
 
@@ -105,36 +112,37 @@ export class ProductEffect {
       ofType(featureAction.updateCartAction),
       withLatestFrom(this._facade.cart$, this._facade.purchase$),
       switchMap(([action, cart, purchase]) => {
-        if (action.transactionType === TransactionType.ADD) {
+        const { transactionType, indexProduct } = getProductIndexInCart(
+          action.productId,
+          purchase
+        );
+
+        if (transactionType === TransactionType.ADD) {
           return this._service
             .addToCart(cart, action.productId, 1)
-            .then(() => {
-              return featureAction.updateCartSuccessAction({
-                transactionType: action.transactionType,
-                productId: action.productId,
-                indexProduct: action.indexProduct
-              });
-            })
-            .catch(() => {
-              return featureAction.updateCartErrorAction();
-            });
+            .then(() =>
+              featureAction.updateCartSuccessAction({
+                productId: action.productId
+              })
+            )
+            .catch((error: firebase.FirebaseError) =>
+              featureAction.updateCartErrorAction({ message: error.message })
+            );
         } else {
           return this._service
             .updateProductInCart(
               cart,
               action.productId,
-              purchase[action.indexProduct]?.quantity
+              purchase[indexProduct]?.quantity + 1
             )
-            .then(() => {
-              return featureAction.updateCartSuccessAction({
-                transactionType: action.transactionType,
-                productId: action.productId,
-                indexProduct: action.indexProduct
-              });
-            })
-            .catch(() => {
-              return featureAction.updateCartErrorAction();
-            });
+            .then(() =>
+              featureAction.updateCartSuccessAction({
+                productId: action.productId
+              })
+            )
+            .catch((error: firebase.FirebaseError) =>
+              featureAction.updateCartErrorAction({ message: error.message })
+            );
         }
       })
     )
@@ -144,18 +152,18 @@ export class ProductEffect {
     this._actions$.pipe(
       ofType(featureAction.deleteFromCartAction),
       withLatestFrom(this._facade.cart$),
-      switchMap(([action, cart]) => {
-        return this._service
+      switchMap(([action, cart]) =>
+        this._service
           .deleteFromCart(cart, action.productId)
-          .then(() => {
-            return featureAction.deleteFromCartSuccessAction({
+          .then(() =>
+            featureAction.deleteFromCartSuccessAction({
               productId: action.productId
-            });
-          })
-          .catch(() => {
-            return featureAction.deleteFromCartErrorAction();
-          });
-      })
+            })
+          )
+          .catch((error: firebase.FirebaseError) =>
+            featureAction.deleteFromCartErrorAction({ message: error.message })
+          )
+      )
     )
   );
 }

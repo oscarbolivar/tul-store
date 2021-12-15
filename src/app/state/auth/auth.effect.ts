@@ -20,6 +20,7 @@ import {
   SESSION_IS_LOGGED_IN
 } from '@core/constants/session-storage';
 import firebase from 'firebase';
+import { HttpErrorResponse } from '@angular/common/http';
 
 @Injectable()
 export class AuthEffect {
@@ -45,7 +46,9 @@ export class AuthEffect {
           })
         )
       ),
-      catchError(() => of(featureAction.isUserLoggedInErrorAction()))
+      catchError((error: HttpErrorResponse) =>
+        of(featureAction.isUserLoggedInErrorAction({ message: error.message }))
+      )
     )
   );
 

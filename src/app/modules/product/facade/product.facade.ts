@@ -4,12 +4,7 @@ import * as action from '@state/product/product.actions';
 import { AppState } from '@state/app.state';
 import { Observable } from 'rxjs';
 import * as selector from '@state/product/product.selector';
-import {
-  Cart,
-  Product,
-  Purchase,
-  TransactionType
-} from '@modules/product/models/product.model';
+import { Cart, Product, Purchase } from '@modules/product/models/product.model';
 
 @Injectable()
 export class ProductFacade {
@@ -25,6 +20,22 @@ export class ProductFacade {
     select(selector.purchaseMapped)
   );
 
+  public workingLayout$: Observable<boolean> = this._store.pipe(
+    select(selector.workingLayout)
+  );
+
+  public completedLayout$: Observable<boolean> = this._store.pipe(
+    select(selector.completedLayout)
+  );
+
+  public working$: Observable<boolean> = this._store.pipe(
+    select(selector.working)
+  );
+
+  public completed$: Observable<boolean> = this._store.pipe(
+    select(selector.completed)
+  );
+
   public fetchProducts(): void {
     this._store.dispatch(action.fetchProductsAction());
   }
@@ -33,14 +44,8 @@ export class ProductFacade {
     this._store.dispatch(action.getPendingCartAction());
   }
 
-  public updateCart(
-    transactionType: TransactionType,
-    productId: string,
-    indexProduct: number
-  ): void {
-    this._store.dispatch(
-      action.updateCartAction({ transactionType, productId, indexProduct })
-    );
+  public updateCart(productId: string): void {
+    this._store.dispatch(action.updateCartAction({ productId }));
   }
 
   public deleteFromCart(productId: string): void {

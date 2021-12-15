@@ -4,7 +4,7 @@ import {
   TransactionType
 } from '@modules/product/models/product.model';
 
-export function getProductFoundedInCart(
+export function getProductIndexInCart(
   productId: string,
   purchase: Purchase[]
 ): ProductFounded {
