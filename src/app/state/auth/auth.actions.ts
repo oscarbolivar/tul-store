@@ -9,7 +9,8 @@ export const isUserLoggedInSuccessAction = createAction(
 );
 
 export const isUserLoggedInErrorAction = createAction(
-  '[Auth] Is User Logged In - Error'
+  '[Auth] Is User Logged In - Error',
+  props<{ message: string }>()
 );
 
 export const loginAction = createAction(

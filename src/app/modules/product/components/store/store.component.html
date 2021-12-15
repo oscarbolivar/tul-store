@@ -16,7 +16,8 @@
         <button
           nz-button
           nzType="primary"
-          (click)="addToCart(product)"
+          [disabled]="working$ | async"
+          (click)="updateCart(product.id)"
           class="store__add-to-cart">
           {{ 'PRODUCT.STORE.LAYOUT.ADD_TO_CART' | translate }}
         </button>
@@ -24,7 +25,7 @@
 
       <ng-template #coverTemplate>
         <img
-          src="https://picsum.photos/id/{{ +product.id * 33 }}/200/300"
+          src="https://picsum.photos/id/{{ +product.id * 22 }}/200/300"
           alt="{{ product.name }}">
       </ng-template>
 

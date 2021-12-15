@@ -43,4 +43,12 @@ export class LayoutContainer implements OnInit {
   get purchase$(): Observable<Purchase[]> {
     return this._productFacade.purchase$;
   }
+
+  get workingLayout$(): Observable<boolean> {
+    return this._productFacade.workingLayout$;
+  }
+
+  get completedLayout$(): Observable<boolean> {
+    return this._productFacade.completedLayout$;
+  }
 }

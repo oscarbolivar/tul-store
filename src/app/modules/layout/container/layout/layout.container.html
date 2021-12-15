@@ -1,7 +1,6 @@
 <nz-layout>
 
   <nz-header>
-
     <ul
       nz-menu
       nzMode="horizontal">
@@ -21,14 +20,14 @@
           <li
             *ngFor="let purchase of purchase$ | async; index as index"
             nz-menu-group
-            nzTitle="{{ purchase.product.name }} ({{ purchase.quantity }})">
+            nzTitle="{{ purchase.name }} ({{ purchase.quantity }})">
           </li>
           <li nz-menu-group>
             <ul>
               <li
                 (click)="goToCart()"
                 nz-menu-item>
-                {{ 'LAYOUT.MENU.CART' | translate }}
+                {{ 'LAYOUT.MENU.CART_ACTION' | translate }}
               </li>
             </ul>
           </li>
@@ -57,10 +56,15 @@
       </li>
 
     </ul>
-
   </nz-header>
 
   <nz-content>
+    <div *ngIf="(workingLayout$ | async) && !(completedLayout$ | async)">
+      <nz-spin
+        nzSimple
+        [nzSize]="'large'"></nz-spin>
+    </div>
+
     <div class="layout-content">
       <router-outlet></router-outlet>
     </div>

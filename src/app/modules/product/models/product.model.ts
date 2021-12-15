@@ -16,8 +16,9 @@ export interface Cart {
 }
 
 export interface Purchase {
-  product: Product;
+  product_id: string;
   quantity: number;
+  name?: string;
 }
 
 export enum TransactionType {

@@ -1,9 +1,5 @@
 import { createAction, props } from '@ngrx/store';
-import {
-  Cart,
-  Product,
-  TransactionType
-} from '@modules/product/models/product.model';
+import { Cart, Product, Purchase } from '@modules/product/models/product.model';
 
 export const fetchProductsAction = createAction('[Product] Fetch Products');
 export const fetchProductsSuccessAction = createAction(
@@ -11,7 +7,8 @@ export const fetchProductsSuccessAction = createAction(
   props<{ products: Product[] }>()
 );
 export const fetchProductsErrorAction = createAction(
-  '[Product] Fetch Products - Error'
+  '[Product] Fetch Products - Error',
+  props<{ message: string }>()
 );
 
 export const getPendingCartAction = createAction(
@@ -22,7 +19,21 @@ export const getPendingCartSuccessAction = createAction(
   props<{ cart: Cart }>()
 );
 export const getPendingCartErrorAction = createAction(
-  '[Product] Get a Pending Cart - Error'
+  '[Product] Get a Pending Cart - Error',
+  props<{ message: string }>()
+);
+
+export const fetchPurchaseAction = createAction(
+  '[Product] Fetch Purchase',
+  props<{ cart: Cart }>()
+);
+export const fetchPurchaseSuccessAction = createAction(
+  '[Product] Fetch Purchase - Success',
+  props<{ purchase: Purchase[] }>()
+);
+export const fetchPurchaseErrorAction = createAction(
+  '[Product] Fetch Purchase - Error',
+  props<{ message: string }>()
 );
 
 export const createCartAction = createAction('[Product] Create a Cart');
@@ -30,25 +41,41 @@ export const createCartSuccessAction = createAction(
   '[Product] Create a Cart - Success'
 );
 export const createCartErrorAction = createAction(
-  '[Product] Create a Cart - Error'
+  '[Product] Create a Cart - Error',
+  props<{ message: string }>()
 );
 
-export const addToCartAction = createAction(
-  '[Product] Add to Cart',
-  props<{
-    transactionType: TransactionType;
-    product: Product;
-    indexProduct: number;
-  }>()
+export const updateCartAction = createAction(
+  '[Product] Update Cart',
+  props<{ productId: string }>()
 );
-export const addToCartSuccessAction = createAction(
-  '[Product] Add to Cart - Success'
+export const updateCartSuccessAction = createAction(
+  '[Product] Update Cart - Success',
+  props<{ productId: string }>()
 );
-export const addToCartErrorAction = createAction(
-  '[Product] Add to Cart - Error'
+export const updateCartErrorAction = createAction(
+  '[Product] Update Cart - Error',
+  props<{ message: string }>()
 );
 
 export const deleteFromCartAction = createAction(
   '[Product] Delete from Cart',
   props<{ productId: string }>()
+);
+export const deleteFromCartSuccessAction = createAction(
+  '[Product] Delete from Cart - Success',
+  props<{ productId: string }>()
+);
+export const deleteFromCartErrorAction = createAction(
+  '[Product] Delete from Cart - Error',
+  props<{ message: string }>()
+);
+
+export const completeOrderAction = createAction('[Product] Complete Order');
+export const completeOrderSuccessAction = createAction(
+  '[Product] Complete Order - Success'
+);
+export const completeOrderErrorAction = createAction(
+  '[Product] Complete Order - Error',
+  props<{ message: string }>()
 );

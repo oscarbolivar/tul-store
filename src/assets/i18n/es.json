@@ -46,8 +46,11 @@
     },
     "CART": {
       "LAYOUT": {
-        "ORDER_TITLE": "Así va tu pedido",
+        "ORDER_TITLE": "Así va tu pedido No. {{cartId}}",
+        "EMPTY_ORDER_TITLE": "Comienza a comprar ahora",
         "PRODUCTS_TITLE": "Tus productos seleccionados",
+        "UNIT": "unidad",
+        "UNITS": "unidades",
         "DELETE_ACTION": "Eliminar",
         "ORDER_ACTION": "Proceder a la compra"
       },
@@ -61,6 +64,7 @@
       "HOME": "Tul Store",
       "BUY": "Comprar",
       "CART": "Carrito",
+      "CART_ACTION": "Ir al carrito",
       "PROFILE": "Perfil",
       "SIGN_OUT_ACTION": "Salir"
     }

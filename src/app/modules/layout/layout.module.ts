@@ -7,6 +7,7 @@ import { TranslateModule } from '@ngx-translate/core';
 import { AuthFacade } from '@modules/auth/facade/auth.facade';
 import { LayoutContainer } from '@modules/layout/container/layout/layout.container';
 import { NzIconModule } from 'ng-zorro-antd/icon';
+import { NzSpinModule } from 'ng-zorro-antd/spin';
 
 @NgModule({
   declarations: [LayoutContainer],
@@ -16,7 +17,8 @@ import { NzIconModule } from 'ng-zorro-antd/icon';
     NzLayoutModule,
     NzMenuModule,
     TranslateModule,
-    NzIconModule
+    NzIconModule,
+    NzSpinModule
   ],
   providers: [AuthFacade]
 })
