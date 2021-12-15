@@ -16,6 +16,7 @@
         <button
           nz-button
           nzType="primary"
+          [disabled]="working$ | async"
           (click)="updateCart(product.id)"
           class="store__add-to-cart">
           {{ 'PRODUCT.STORE.LAYOUT.ADD_TO_CART' | translate }}

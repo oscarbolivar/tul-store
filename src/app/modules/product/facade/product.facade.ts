@@ -32,10 +32,6 @@ export class ProductFacade {
     select(selector.working)
   );
 
-  public completed$: Observable<boolean> = this._store.pipe(
-    select(selector.completed)
-  );
-
   public fetchProducts(): void {
     this._store.dispatch(action.fetchProductsAction());
   }
@@ -46,6 +42,10 @@ export class ProductFacade {
 
   public updateCart(productId: string): void {
     this._store.dispatch(action.updateCartAction({ productId }));
+  }
+
+  public completeOrderAction(): void {
+    this._store.dispatch(action.completeOrderAction());
   }
 
   public deleteFromCart(productId: string): void {

@@ -12,6 +12,7 @@ import {
   Purchase
 } from '@modules/product/models/product.model';
 import { getUniqueId } from '@core/helpers/app.helper';
+import { map, take } from 'rxjs/operators';
 
 @Injectable()
 export class ProductService {
@@ -79,5 +80,42 @@ export class ProductService {
       .collection('product_carts')
       .doc(`${cart.id}_${productId}`)
       .delete();
+  }
+
+  public getPendingCartDocumentId(cart: Cart): Observable<{ id: string }[]> {
+    return this._firestore
+      .collection<Cart>('carts')
+      .snapshotChanges()
+      .pipe(
+        map((actions) =>
+          actions
+            .map((action) => {
+              const data = action.payload.doc.data() as Cart;
+              const id = action.payload.doc.id;
+              return data.id === cart.id ? { id } : { id: '' };
+            })
+            .filter((action) => !!action.id)
+        )
+      );
+  }
+
+  public completeOrder(cart: Cart): Promise<void> {
+    return new Promise((resolve, reject) => {
+      this.getPendingCartDocumentId(cart)
+        .pipe(take(1))
+        .subscribe((snapshot) => {
+          if (snapshot.length === 0) {
+            reject();
+          }
+
+          this._firestore
+            .collection('carts')
+            .doc(snapshot[0].id)
+            .update({ status: CART_STATUS.COMPLETED })
+            .then(() => {
+              resolve();
+            });
+        });
+    });
   }
 }

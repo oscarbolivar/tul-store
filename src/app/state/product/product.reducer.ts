@@ -24,6 +24,7 @@ export const productReducer = createReducer(
     action.fetchPurchaseErrorAction,
     action.updateCartErrorAction,
     action.deleteFromCartErrorAction,
+    action.completeOrderErrorAction,
     (state, { message }) => ({
       ...state,
       workingLayout: false,
@@ -122,5 +123,18 @@ export const productReducer = createReducer(
     working: false,
     completed: true,
     message: ''
+  })),
+
+  on(action.completeOrderAction, (state) => ({
+    ...state,
+    working: true,
+    completed: false
+  })),
+  on(action.completeOrderSuccessAction, (state) => ({
+    ...state,
+    cart: {},
+    purchase: [],
+    working: false,
+    completed: true
   }))
 );

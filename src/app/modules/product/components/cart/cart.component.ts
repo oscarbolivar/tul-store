@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { Observable } from 'rxjs';
-import { Purchase } from '@modules/product/models/product.model';
+import { Cart, Purchase } from '@modules/product/models/product.model';
 import { ProductFacade } from '@modules/product/facade/product.facade';
 
 @Component({
@@ -15,7 +15,13 @@ export class CartComponent {
     this._facade.deleteFromCart(productId);
   }
 
-  public order(): void {}
+  public completeOrder(): void {
+    this._facade.completeOrderAction();
+  }
+
+  get cart$(): Observable<Cart> {
+    return this._facade.cart$;
+  }
 
   get purchase$(): Observable<Purchase[]> {
     return this._facade.purchase$;

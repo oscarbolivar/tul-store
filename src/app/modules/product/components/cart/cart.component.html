@@ -1,4 +1,10 @@
-<h3>{{ 'PRODUCT.CART.LAYOUT.ORDER_TITLE' | translate }}</h3>
+<h3 *ngIf="!!(cart$ | async)?.id; else emptyTitle">
+  {{ 'PRODUCT.CART.LAYOUT.ORDER_TITLE' | translate: { cartId: (cart$ | async)?.id } }}
+</h3>
+
+<ng-template #emptyTitle>
+  <h3>{{ 'PRODUCT.CART.LAYOUT.EMPTY_ORDER_TITLE' | translate }}</h3>
+</ng-template>
 
 <ul
   nz-list
@@ -21,14 +27,20 @@
       </nz-list-item-action>
     </ul>
 
-    {{ purchase.name }} | {{ purchase.quantity }} unidades
+    <span>
+      {{ purchase.name }} | {{ purchase.quantity }}
+      {{ purchase.quantity === 1
+        ? ('PRODUCT.CART.LAYOUT.UNIT' | translate)
+        : ('PRODUCT.CART.LAYOUT.UNITS' | translate) }}
+    </span>
   </li>
 
   <nz-list-footer>
     <button
       nz-button
       nzType="primary"
-      (click)="order()">
+      [disabled]="(purchase$ | async)?.length === 0"
+      (click)="completeOrder()">
       {{ 'PRODUCT.CART.LAYOUT.ORDER_ACTION' | translate }}
     </button>
   </nz-list-footer>

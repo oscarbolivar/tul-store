@@ -25,4 +25,8 @@ export class StoreComponent implements AfterViewInit {
   get products$(): Observable<Product[]> {
     return this._facade.products$;
   }
+
+  get working$(): Observable<boolean> {
+    return this._facade.working$;
+  }
 }

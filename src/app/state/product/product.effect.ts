@@ -166,4 +166,19 @@ export class ProductEffect {
       )
     )
   );
+
+  public completeOrder$ = createEffect(() =>
+    this._actions$.pipe(
+      ofType(featureAction.completeOrderAction),
+      withLatestFrom(this._facade.cart$),
+      switchMap(([_, cart]) =>
+        this._service
+          .completeOrder(cart)
+          .then(() => featureAction.completeOrderSuccessAction())
+          .catch((error: firebase.FirebaseError) =>
+            featureAction.completeOrderErrorAction({ message: error.message })
+          )
+      )
+    )
+  );
 }

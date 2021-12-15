@@ -35,11 +35,6 @@ export const working = createSelector(
   (state: ProductState) => state.working
 );
 
-export const completed = createSelector(
-  productModule,
-  (state: ProductState) => state.completed
-);
-
 export const purchaseMapped = createSelector(purchase, products, mapPurchase);
 
 function mapPurchase(_purchase: Purchase[], _products: Product[]): Purchase[] {

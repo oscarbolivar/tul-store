@@ -70,3 +70,12 @@ export const deleteFromCartErrorAction = createAction(
   '[Product] Delete from Cart - Error',
   props<{ message: string }>()
 );
+
+export const completeOrderAction = createAction('[Product] Complete Order');
+export const completeOrderSuccessAction = createAction(
+  '[Product] Complete Order - Success'
+);
+export const completeOrderErrorAction = createAction(
+  '[Product] Complete Order - Error',
+  props<{ message: string }>()
+);
