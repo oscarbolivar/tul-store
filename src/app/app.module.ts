@@ -1,4 +1,4 @@
-import { APP_INITIALIZER, NgModule } from '@angular/core';
+import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -24,14 +24,9 @@ import { AuthService } from '@modules/auth/services/auth.service';
 import { AuthFacade } from '@modules/auth/facade/auth.facade';
 import { ProductService } from '@modules/product/services/product.service';
 import { ProductFacade } from '@modules/product/facade/product.facade';
+import { LoginGuard } from '@modules/auth/guards/login.guard';
 
 registerLocaleData(es_CO);
-
-export function initializeApp(authFacade: AuthFacade): () => void {
-  return (): void => {
-    return authFacade.isUserLoggedIn();
-  };
-}
 
 @NgModule({
   bootstrap: [AppComponent],
@@ -55,16 +50,11 @@ export function initializeApp(authFacade: AuthFacade): () => void {
     AuthFacade,
     ProductService,
     ProductFacade,
+    LoginGuard,
     { provide: NZ_I18N, useValue: es_ES },
     {
       provide: INITIAL_STATE,
       useValue: INITIAL_APP_STATE
-    },
-    {
-      provide: APP_INITIALIZER,
-      useFactory: initializeApp,
-      multi: true,
-      deps: [AuthFacade]
     }
   ]
 })

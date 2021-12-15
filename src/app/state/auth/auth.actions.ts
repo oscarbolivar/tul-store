@@ -2,17 +2,6 @@ import { createAction, props } from '@ngrx/store';
 
 export const resetAction = createAction('[Auth] Reset');
 
-export const isUserLoggedInAction = createAction('[Auth] Is User Logged In');
-
-export const isUserLoggedInSuccessAction = createAction(
-  '[Auth] Is User Logged In - Success'
-);
-
-export const isUserLoggedInErrorAction = createAction(
-  '[Auth] Is User Logged In - Error',
-  props<{ message: string }>()
-);
-
 export const loginAction = createAction(
   '[Auth] Login User',
   props<{ email: string; password: string }>()

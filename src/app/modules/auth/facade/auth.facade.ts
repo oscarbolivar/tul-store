@@ -25,10 +25,6 @@ export class AuthFacade {
     this._store.dispatch(action.resetAction());
   }
 
-  public isUserLoggedIn(): void {
-    this._store.dispatch(action.isUserLoggedInAction());
-  }
-
   public login(email: string, password: string): void {
     this._store.dispatch(action.loginAction({ email, password }));
   }

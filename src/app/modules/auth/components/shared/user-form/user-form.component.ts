@@ -8,7 +8,6 @@ import { User } from '@modules/auth/models/auth.model';
   styleUrls: ['./user-form.component.sass']
 })
 export class UserFormComponent implements OnInit {
-  @Input() isLogin: boolean = false;
   @Input() title!: string;
   @Input() buttonTitle!: string;
   @Input() goToTitle!: string;
@@ -16,7 +15,6 @@ export class UserFormComponent implements OnInit {
   @Input() completed!: boolean;
   @Input() message!: string;
 
-  @Output() isUserLoggedIn: EventEmitter<void> = new EventEmitter<void>();
   @Output() onSubmit: EventEmitter<User> = new EventEmitter<User>();
   @Output() onGoTo: EventEmitter<void> = new EventEmitter<void>();
 
@@ -25,10 +23,6 @@ export class UserFormComponent implements OnInit {
   constructor(private _formBuilder: FormBuilder) {}
 
   ngOnInit(): void {
-    if (this.isLogin) {
-      this.isUserLoggedIn.emit();
-    }
-
     this.formGroup = this._formBuilder.group({
       email: [null, [Validators.required, Validators.email]],
       password: [null, [Validators.required]]
